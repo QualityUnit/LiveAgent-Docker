@@ -33,7 +33,7 @@ IPTABLES_RULES=
 SERVER_NAME=
 ALIAS_NAME=
 
-#Enter existing path with quotes to location where Mysql backup files should be saved
+#Enter path with quotes to location where Mysql backup files should be saved
 #Do not end it with "/" on the end. For example = "/app/DBbackups"
 BACKUP_PATH=""
 
@@ -87,6 +87,8 @@ SUPERVISOR_PASS=
 ###############################################################################
 echo "Are you on the 1st, 2nd or 3rd host right now? Write just a number: "
 read VALUE
+
+mkdir -p ./production; mkdir -p ./backup; mkdir -p $BACKUP_PATH
 
 SSL_CRT=./ssl.crt
 SSL_KEY=./ssl.key
