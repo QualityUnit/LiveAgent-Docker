@@ -26,7 +26,7 @@ wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -P ./
 wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamav-0.99.4-3788.el7.art.x86_64.rpm -P ./conf
 wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamav-db-0.99.4-3788.el7.art.x86_64.rpm -P ./conf
 wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamd-0.99.4-3788.el7.art.x86_64.rpm -P ./conf
-rpm -ivh .conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm .conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
+rpm -ivh ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
 yum -y install socat
 mkdir -p /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker2/clamav && chown clamav:clamav /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker2/clamav
 cp -r ./conf/freshclam.conf /etc/freshclam.conf
