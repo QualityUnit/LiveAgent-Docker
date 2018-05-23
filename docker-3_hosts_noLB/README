@@ -33,9 +33,9 @@ Build info
 
 VERSION UPDATE
 
-*  download/move new version of LA .zip file to /opt (standalone) or /opt/docker1 (more hosts setup)
+*  download/move new version of LA .zip file to "docker1" directory
 *  run version_update.sh script - chmod +x version_update.sh && ./version_update.sh
-*  follow instructions from script
+*  follow instructions from the script
 
 USEFUL DOCKER COMMANDS
 
