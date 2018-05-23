@@ -6,7 +6,7 @@ sed -i "s/#LogLevel=info/LogLevel=notice/g" /etc/systemd/system.conf && systemct
 
 #AWS CLI & YUM UPDATE
 
-yum -y install wget unzip git
+yum -y install wget unzip
 yum update -y
 
 #GEOIP
@@ -16,10 +16,10 @@ rpm -ivh ./conf/geoipupdate-2.2.2-2.el7.art.x86_64.rpm
 mkdir -p ./geoip/
 cp -r ./conf/GeoIP.conf /etc/GeoIP.conf
 echo "#GEOIP" >> /etc/crontab
-echo "44 2 * * 6 root /usr/bin/geoipupdate -d /opt/docker-3_hosts_noLB/production/docker1/geoip/ > /dev/null" >> /etc/crontab
+echo "44 2 * * 6 root /usr/bin/geoipupdate -d /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/geoip/ > /dev/null" >> /etc/crontab
 echo "" >> /etc/crontab
 wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -P ./geoip/ && gunzip -f ./geoip/GeoLiteCity.dat.gz
-/usr/bin/geoipupdate -d /opt/docker-3_hosts_noLB/production/docker1/geoip/ > /dev/null
+/usr/bin/geoipupdate -d /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/geoip/ > /dev/null
 
 #CLAMAV
 
@@ -28,7 +28,7 @@ wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamav-db-0.
 wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamd-0.99.4-3788.el7.art.x86_64.rpm -P ./conf
 rpm -ivh .conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm .conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
 yum -y install socat
-mkdir -p /opt/docker-3_hosts_noLB/production/docker1/clamav && chown clamav:clamav /opt/docker-3_hosts_noLB/production/docker1/clamav
+mkdir -p /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/clamav && chown clamav:clamav /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/clamav
 cp -r ./conf/freshclam.conf /etc/freshclam.conf
 /usr/bin/freshclam
 cp -r ./conf/clamd.service /etc/systemd/system/clamd.service
@@ -63,7 +63,7 @@ systemctl start docker && systemctl enable docker
 
 #INSTALL DOCKER-COMPOSE
 
-cp .conf/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+cp ./conf/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 #INSTALL XINETD
