@@ -1,0 +1,13 @@
+cluster.name: "es-cluster"
+node.name: "es1-docker-node"
+network.host: 0.0.0.0
+network.bind_host: 0.0.0.0
+node.master: true
+node.data: true
+network.publish_host: PRIVATE_IP_1
+discovery.zen.minimum_master_nodes: 2
+discovery.zen.ping.unicast.hosts: ["PRIVATE_IP_1", "PRIVATE_IP_2", "PRIVATE_IP_3"]
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-headers: "Authorization"

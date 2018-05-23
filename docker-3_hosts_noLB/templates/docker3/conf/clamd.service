@@ -1,0 +1,13 @@
+[Unit]
+Description=Clam AntiVirus userspace daemon
+# Check for database existence
+ConditionPathExistsGlob=/opt/docker-3_hosts_noLB/production/docker3/clamav/main.{c[vl]d,inc}
+ConditionPathExistsGlob=/opt/docker-3_hosts_noLB/production/docker3/clamav/daily.{c[vl]d,inc}
+
+[Service]
+ExecStart=/usr/sbin/clamd -c /etc/clamd.conf --foreground=true
+ExecReload=/bin/kill -USR2 $MAINPID
+Restart= on-failure
+
+[Install]
+WantedBy=multi-user.target
