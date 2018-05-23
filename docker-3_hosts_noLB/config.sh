@@ -21,6 +21,10 @@ PRIVATE_IP_2=
 #Enter private IP of the THIRD host
 PRIVATE_IP_3=
 
+#Enter path to location where LiveAgent .zip file is saved
+#Always have only the most current version in this directory, remove old ones!!!
+LA_LOCATION=
+
 #Did you already modified /etc/hosts by yourself? Please write yes or no
 #If no, this script will do it for you
 ETC_HOSTS_MODIFIED=
@@ -165,12 +169,15 @@ grep -r "SUPERVISOR_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | 
 if [ "$VALUE" -eq "1" ] 2>/dev/null; then
   rm -rf ./production/docker2 ./production/docker3
   ln -s /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1 /opt/docker1
+  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/apache-fpm/
 elif [ "$VALUE" -eq "2" ] 2>/dev/null; then
   rm -rf ./production/docker1 ./production/docker3
   ln -s /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker2 /opt/docker2
+  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker2/apache-fpm/
 elif [ "$VALUE" -eq "3" ] 2>/dev/null; then
   rm -rf ./production/docker1 ./production/docker2
   ln -s /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3 /opt/docker3
+  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3/apache-fpm/
 else
   echo "Please re-run this script and write only numbers from 1 to 3"
 fi
