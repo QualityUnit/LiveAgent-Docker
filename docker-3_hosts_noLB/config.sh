@@ -24,7 +24,7 @@ ETC_HOSTS_MODIFIED=
 #Do you want this script to set up iptables (firewall) for you?
 #You can enter "no" or "yes" (don't leave it empty) and modify iptables.sh in ./conf
 #directory before running this script, deafult IPtables rules are to only
-#expose ports 80, 443 and 22 for liveagent to work and you to ssh from anywher,
+#expose port 443 for liveagent to work and you to ssh from anywher,
 #everything else is blocked or accessible only by internal/docker network
 IPTABLES_RULES=
 
@@ -111,9 +111,10 @@ grep -r "PRIVATE_IP_3" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xar
 grep -r "SERVER_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/SERVER_NAME/$SERVER_NAME/g"
 grep -r "ALIAS_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ALIAS_NAME/$ALIAS_NAME/g"
 
-if [ $ETC_HOSTS_MODIFIED = no ]
+GREP_ETC_HOSTS=$(grep $SERVER_NAME /etc/hosts)
+if [ $ETC_HOSTS_MODIFIED = no ] && [ "$VALUE" -eq "1" ] && [ "$GREP_ETC_HOSTS" == "" ]
 then
-  echo "$CUSTOMER_IP       $SERVER_NAME $ALIAS_NAME" >> /etc/hosts
+  echo "$PRIVATE_IP_1       $SERVER_NAME $ALIAS_NAME" >> /etc/hosts
 fi
 
 if [ $IPTABLES_RULES = no ]
@@ -159,10 +160,13 @@ grep -r "SUPERVISOR_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | 
 
 if [ "$VALUE" -eq "1" ] 2>/dev/null; then
   rm -rf ./production/docker2 ./production/docker3
+  ln -s /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1 /opt/docker1
 elif [ "$VALUE" -eq "2" ] 2>/dev/null; then
   rm -rf ./production/docker1 ./production/docker3
+  ln -s /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker2 /opt/docker2
 elif [ "$VALUE" -eq "3" ] 2>/dev/null; then
   rm -rf ./production/docker1 ./production/docker2
+  ln -s /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3 /opt/docker3
 else
   echo "Please re-run this script and write only numbers from 1 to 3"
 fi

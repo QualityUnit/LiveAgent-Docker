@@ -12,14 +12,14 @@ yum update -y
 #GEOIP
 
 if [[ $(yum list installed geoip | grep 'base\|anaconda\|installed' | wc -l) == 1 ]]; then yum remove geoip -y; fi
-rpm -ivh ./conf/geoipupdate-2.2.2-2.el7.art.x86_64.rpm
+rpm -ivh ./conf/geoipupdate-2.2.2-2.el7.art.x86_64.rpm && rm -rf ./conf/geoipupdate-2.2.2-2.el7.art.x86_64.rpm
 mkdir -p ./geoip/
-cp -r ./conf/GeoIP.conf /etc/GeoIP.conf
+cp -r ./conf/GeoIP.conf /etc/GeoIP.conf && rm -rf ./conf/GeoIP.conf
 echo "#GEOIP" >> /etc/crontab
-echo "44 2 * * 6 root /usr/bin/geoipupdate -d /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3/geoip/ > /dev/null" >> /etc/crontab
+echo "44 2 * * 6 root /usr/bin/geoipupdate -d /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/geoip/ > /dev/null" >> /etc/crontab
 echo "" >> /etc/crontab
 wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -P ./geoip/ && gunzip -f ./geoip/GeoLiteCity.dat.gz
-/usr/bin/geoipupdate -d /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3/geoip/ > /dev/null
+/usr/bin/geoipupdate -d /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/geoip/ > /dev/null
 
 #CLAMAV
 
@@ -27,12 +27,13 @@ wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamav-0.99.
 wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamav-db-0.99.4-3788.el7.art.x86_64.rpm -P ./conf
 wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamd-0.99.4-3788.el7.art.x86_64.rpm -P ./conf
 rpm -ivh ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
+rm -rf ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
 yum -y install socat
-mkdir -p /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3/clamav && chown clamav:clamav /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3/clamav
-cp -r ./conf/freshclam.conf /etc/freshclam.conf
+mkdir -p /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/clamav && chown clamav:clamav /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/clamav
+cp -r ./conf/freshclam.conf /etc/freshclam.conf && rm -rf ./conf/freshclam.conf
 /usr/bin/freshclam
-cp -r ./conf/clamd.service /etc/systemd/system/clamd.service
-cp -r ./conf/clamd.conf /etc/clamd.conf
+cp -r ./conf/clamd.service /etc/systemd/system/clamd.service && rm -rf ./conf/clamd.service
+cp -r ./conf/clamd.conf /etc/clamd.conf && rm -rf ./conf/clamd.conf
 systemctl start clamd.service && systemctl enable clamd.service
 echo "#CLAMD" >> /etc/crontab
 echo "25 3 * * * root /usr/bin/freshclam" >> /etc/crontab
@@ -63,7 +64,7 @@ systemctl start docker && systemctl enable docker
 
 #INSTALL DOCKER-COMPOSE
 
-cp ./conf/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+cp ./conf/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose && rm -rf ./conf/docker-compose-Linux-x86_64
 chmod +x /usr/local/bin/docker-compose
 
 #INSTALL XINETD
@@ -73,9 +74,9 @@ systemctl enable xinetd.service && systemctl start xinetd.service
 
 #RSYNC SET UP
 
-cp ./conf/rsync /etc/xinetd.d/rsync
+cp ./conf/rsync /etc/xinetd.d/rsync && rm -rf ./conf/rsync
 chmod +x /etc/xinetd.d/rsync
-cp ./conf/rsyncd.conf /etc/rsyncd.conf
+cp ./conf/rsyncd.conf /etc/rsyncd.conf && rm -rf ./conf/rsyncd.conf
 chmod 644 /etc/rsyncd.conf
 chmod 600 ./conf/rsyncd.secrets
 chmod 600 ./conf/rsync_pass
