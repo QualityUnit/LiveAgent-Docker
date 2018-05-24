@@ -9,7 +9,7 @@ Prerequisites:
 Build info
 
     DO EVERY STEP ON ALL HOSTS UNTIL TOLD OTHERWISE
-1.  Install GIT (yum install git)
+1.  Install GIT (yum install git) and run "git clone https://github.com/QualityUnit/LiveAgent-Docker.git"
 2.  Create valid ssl.crt and ssl.key files in /opt/LiveAgent-Docker/docker-3_hosts_noLB/
 3.  Modify config.sh file and enter all requested info
 4.  Run config.sh file in /opt/LiveAgent-Docker/docker-3_hosts_noLB/ with "chmod +x ./config.sh && ./config.sh
@@ -18,12 +18,12 @@ Build info
 
 7.  Set up database and replication on hosts 1 and 2:
 
--    run docker exec -it mysql bash on both hosts
--    run mysql and then source /tmp/initdb.sql; on both hosts
--    exit mysql shell and enter mysql.bin number and position to other host /tmp/replication.sql in container (Info from first host enter to second and vice versa)
--    enter mysql shell on both hosts again and run source /tmp/replication.sql;
--    verify if replications are set on both hosts via show slave status\G (both Slave_IO_Running and Slave_SQL_Running must be Yes without errors)
--    run source /tmp/createdb.sql; on the first host
+-    run "docker exec -it mysql bash" on both hosts
+-    run "mysql" and then "source /tmp/initdb.sql;" on both hosts
+-    exit mysql shell and enter mysql.bin number and position to other host "/tmp/replication.sql" in container (Info from first host enter to second and vice versa)
+-    enter mysql shell on both hosts again and run "source /tmp/replication.sql;"
+-    verify if replications are set on both hosts via "show slave status\G" (both Slave_IO_Running and Slave_SQL_Running must be Yes without errors)
+-    run "source /tmp/createdb.sql;" on the first host
 
 8.  Restart haproxy and xinetd on 1st host and only xinetd on 2nd and 3rd - "service xinetd restart && docker restart haproxy"
 9.  Open your site for LA setup (site you entered in config.sh), STOP AFTER YOU LOG IN TO YOUR AGENT PANEL
@@ -33,9 +33,9 @@ Build info
 
 VERSION UPDATE
 
-*  download/move new version of LA .zip file to /opt (standalone) or /opt/docker1 (more hosts setup)
+*  download/move new version of LA .zip file to "docker1" directory
 *  run version_update.sh script - chmod +x version_update.sh && ./version_update.sh
-*  follow instructions from script
+*  follow instructions from the script
 
 USEFUL DOCKER COMMANDS
 
