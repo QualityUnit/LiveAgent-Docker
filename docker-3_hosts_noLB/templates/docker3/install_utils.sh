@@ -29,7 +29,7 @@ wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamd-0.99.4
 rpm -ivh ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
 rm -rf ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
 yum -y install socat
-mkdir -p /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/clamav && chown clamav:clamav /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker1/clamav
+mkdir -p /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3/clamav && chown clamav:clamav /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3/clamav
 cp -r ./conf/freshclam.conf /etc/freshclam.conf && rm -rf ./conf/freshclam.conf
 /usr/bin/freshclam
 cp -r ./conf/clamd.service /etc/systemd/system/clamd.service && rm -rf ./conf/clamd.service
