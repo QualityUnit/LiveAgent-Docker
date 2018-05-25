@@ -6,8 +6,9 @@
 #
  iptables -F
 #
-# Allow HTTPS connections
+# Allow HTTP/HTTPS connections
 #
+ iptables -A INPUT -p tcp --dport 80 -j ACCEPT
  iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 #
 # Set default policies for INPUT, FORWARD and OUTPUT chains
