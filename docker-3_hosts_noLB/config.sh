@@ -96,7 +96,7 @@ SUPERVISOR_PASS=
 echo "Are you on the 1st, 2nd or 3rd host right now? Write just a number: "
 read VALUE
 
-mkdir -p ./production; mkdir -p ./backup; mkdir -p $BACKUP_PATH
+mkdir -p ./production; mkdir -p ./backup
 
 SSL_CRT=./ssl.crt
 SSL_KEY=./ssl.key

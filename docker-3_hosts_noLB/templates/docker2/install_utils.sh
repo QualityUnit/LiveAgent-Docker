@@ -92,6 +92,7 @@ chown root:root ./conf/rsyncd.secrets ./conf/rsync_pass
 
 #MYSQL
 
+mkdir -p BACKUP_PATH
 mv /opt/docker2/conf/db_bck_check.sh BACKUP_PATH/db_bck_check.sh && chmod +x BACKUP_PATH/db_bck_check.sh
 echo "#MYSQL" >> /etc/crontab
 echo "0 BACKUP_RUN * * * root BACKUP_PATH/db_bck_check.sh" >> /etc/crontab
