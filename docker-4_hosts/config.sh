@@ -2,12 +2,11 @@
 #
 # Configuration script for customer environment in Docker
 # Please don't use any spaces after "=" and remember to
-# save all passwords somwhere safe
+# save all passwords somewhere safe
 #
 
-#Enter public IP of your liveagent site to modify /etc/hosts
-#IF YOU ALREADY MODIFIED /etc/hosts manually -> please comment this line
-CUSTOMER_IP=
+#Enter public/private float IP of your liveagent site
+FLOAT_IP=
 
 #Interface with private IP, for example: eth1 (needed for iptables rules)
 PRIVATE_IF_NAME=
@@ -122,14 +121,14 @@ grep -r "PRIVATE_IP_1" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xar
 grep -r "PRIVATE_IP_2" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_2/$PRIVATE_IP_2/g"
 grep -r "PRIVATE_IP_3" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_3/$PRIVATE_IP_3/g"
 grep -r "PRIVATE_IP_4" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_4/$PRIVATE_IP_4/g"
-grep -r "CUSTOMER_IP" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/CUSTOMER_IP/$CUSTOMER_IP/g"
+grep -r "FLOAT_IP" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/FLOAT_IP/$FLOAT_IP/g"
 grep -r "SERVER_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/SERVER_NAME/$SERVER_NAME/g"
 grep -r "ALIAS_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ALIAS_NAME/$ALIAS_NAME/g"
 
 GREP_ETC_HOSTS=$(grep $SERVER_NAME /etc/hosts)
 if [ $ETC_HOSTS_MODIFIED = no ] && [ "$GREP_ETC_HOSTS" == "" ] && [ "$VALUE" -eq "1" ] || [ "$VALUE" -eq "2" ]
 then
-  echo "$CUSTOMER_IP       $SERVER_NAME $ALIAS_NAME" >> /etc/hosts
+  echo "$FLOAT_IP       $SERVER_NAME $ALIAS_NAME" >> /etc/hosts
 fi
 
 if [ $IPTABLES_RULES = no ]

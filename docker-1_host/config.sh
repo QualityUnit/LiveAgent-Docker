@@ -2,12 +2,11 @@
 #
 # Configuration script for customer environment in docker
 # Please don't use any spaces after "=" and remember to
-# save all passwords somwhere safe
+# save all passwords somewhere safe
 #
 
-#Enter public IP of your liveagent site to modify /etc/hosts
-#IF YOU ALREADY MODIFIED /etc/hosts manually -> please comment this line
-CUSTOMER_IP=
+#Enter public/private float IP of your liveagent site
+FLOAT_IP=
 
 #Do you want this script to set up iptables (firewall) for you?
 #You can enter "no" or "yes" (don't leave it empty) and modify iptables.sh in ./conf
@@ -88,7 +87,7 @@ grep -r "ALIAS_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs
 GREP_ETC_HOSTS=$(grep $SERVER_NAME /etc/hosts)
 if [ $ETC_HOSTS_MODIFIED = no ] && [ "$GREP_ETC_HOSTS" == "" ]
 then
-  echo "$CUSTOMER_IP       $SERVER_NAME $ALIAS_NAME" >> /etc/hosts
+  echo "$FLOAT_IP       $SERVER_NAME $ALIAS_NAME" >> /etc/hosts
 fi
 
 if [ $IPTABLES_RULES = no ]
