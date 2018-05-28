@@ -1,4 +1,4 @@
-LiveAgent docker infra setup for 3 servers with LB only on the 1st one, mysql on 1st and 2nd (master-master replication with backup set up on 2nd), redis on 1st and 2nd, elasticsearch on all 3.
+LiveAgent docker infra setup for 3 servers with LB on all of them, mysql on 1st and 2nd (master-master replication with backup set up on 2nd), redis on 1st and 2nd, elasticsearch on all 3.
 
 Prerequisites:
 
@@ -25,7 +25,7 @@ Build info
 -    verify if replications are set on both hosts via "show slave status\G" (both Slave_IO_Running and Slave_SQL_Running must be Yes without errors)
 -    run "source /tmp/createdb.sql;" on the first host
 
-8.  Restart haproxy and xinetd on 1st host and only xinetd on 2nd and 3rd - "service xinetd restart && docker restart haproxy"
+8.  Restart haproxy and xinetd on all hosts - "service xinetd restart && docker restart haproxy"
 9.  Open your site for LA setup (site you entered in config.sh), STOP AFTER YOU LOG IN TO YOUR AGENT PANEL
 10. Run "after_install.sh" on all 3 hosts with "chmod +x ./after_install.sh && ./after_install" (on host 1 or 2 will this script report error about redis slave - it's OK)
 11. Enter "your_private_ip:9000/haproxy_stats" into your browser, username: admin and password you entered in config.sh for haproxy and check if all hosts are UP except one redis host as sentinels choose which redis host is master

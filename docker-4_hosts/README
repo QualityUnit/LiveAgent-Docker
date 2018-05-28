@@ -1,8 +1,8 @@
-LiveAgent docker infra setup for 3 servers with LB only on the 1st one, mysql on 1st and 2nd (master-master replication with backup set up on 2nd), redis on 1st and 2nd, elasticsearch on all 3.
+LiveAgent docker infra setup for 4 servers with LB on first and second, mysql on 3rd and 4th (master-master replication with backup set up on 3rd), redis on 1st and 2nd, elasticsearch on first, second and third.
 
 Prerequisites:
 
-* 3 physical/virtual hosts with enough RAM, CPU and disk space
+* 4 physical/virtual hosts with enough RAM, CPU and disk space
 * CENTOS 7 with SUDO privileges on all hosts
 * compatible LA version (The newest should do)
 
@@ -16,7 +16,7 @@ Build info
 5.  Enter "production/docker" directory on each host and run install_utils.sh script with "chmod +x ./install_utils.sh && ./install_utils.sh"
 6.  Run docker-compose on each host after step 7 is done "/usr/local/bin/docker-compose up -d"
 
-7.  Set up database and replication on hosts 1 and 2:
+7.  Set up database and replication on hosts 3 and 4:
 
 -    run "docker exec -it mysql bash" on both hosts
 -    run "mysql" and then "source /tmp/initdb.sql;" on both hosts
@@ -25,9 +25,9 @@ Build info
 -    verify if replications are set on both hosts via "show slave status\G" (both Slave_IO_Running and Slave_SQL_Running must be Yes without errors)
 -    run "source /tmp/createdb.sql;" on the first host
 
-8.  Restart haproxy and xinetd on 1st host and only xinetd on 2nd and 3rd - "service xinetd restart && docker restart haproxy"
+8.  Restart haproxy and xinetd on 1 and 2 and only xinetd on 3 and 4 - "service xinetd restart && docker restart haproxy"
 9.  Open your site for LA setup (site you entered in config.sh), STOP AFTER YOU LOG IN TO YOUR AGENT PANEL
-10. Run "after_install.sh" on all 3 hosts with "chmod +x ./after_install.sh && ./after_install" (on host 1 or 2 will this script report error about redis slave - it's OK)
+10. Run "after_install.sh" on all 4 hosts with "chmod +x ./after_install.sh && ./after_install" (on host 1 or 2 will this script report error about redis slave - it's OK)
 11. Enter "your_private_ip:9000/haproxy_stats" into your browser, username: admin and password you entered in config.sh for haproxy and check if all hosts are UP except one redis host as sentinels choose which redis host is master
 12. Enjoy
 

@@ -5,8 +5,8 @@
 # save all passwords somewhere safe
 #
 
-#Enter public/private float IP of your liveagent site
-FLOAT_IP=
+#Enter public/private IP of your liveagent site (from which you will access LiveAgent)
+CUSTOMER_IP=
 
 #Do you want this script to set up iptables (firewall) for you?
 #You can enter "no" or "yes" (don't leave it empty) and modify iptables.sh in ./conf
@@ -87,7 +87,7 @@ grep -r "ALIAS_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs
 GREP_ETC_HOSTS=$(grep $SERVER_NAME /etc/hosts)
 if [ $ETC_HOSTS_MODIFIED = no ] && [ "$GREP_ETC_HOSTS" == "" ]
 then
-  echo "$FLOAT_IP       $SERVER_NAME $ALIAS_NAME" >> /etc/hosts
+  echo "$CUSTOMER_IP       $SERVER_NAME $ALIAS_NAME" >> /etc/hosts
 fi
 
 if [ $IPTABLES_RULES = no ]
