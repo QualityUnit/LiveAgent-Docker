@@ -23,6 +23,7 @@ PRIVATE_IP_3=
 
 #Enter path to location where LiveAgent .zip file is saved
 #Always have only the most current version in this directory, remove old ones!!!
+#For example LA_LOCATION=/tmp
 LA_LOCATION=
 
 #Did you already modified /etc/hosts by yourself? Please write yes or no
@@ -32,7 +33,7 @@ ETC_HOSTS_MODIFIED=
 #Do you want this script to set up iptables (firewall) for you?
 #You can enter "no" or "yes" (don't leave it empty) and modify iptables.sh in ./conf
 #directory before running this script, deafult IPtables rules are to only
-#expose port 443 for liveagent to work and you to ssh from anywher,
+#expose ports 80 and 443 for liveagent to work and you to ssh from anywher,
 #everything else is blocked or accessible only by internal/docker network
 IPTABLES_RULES=
 
@@ -100,13 +101,13 @@ mkdir -p ./production; mkdir -p ./backup
 
 SSL_CRT=./ssl.crt
 SSL_KEY=./ssl.key
-if [ -f $SSL_CRT ] && [ -f $SSL_KEY ]; then
+if [ -f $SSL_CRT ] && [ -f $SSL_KEY ] && [ -f $LA_LOCATION/la*.zip ]; then
   tar -zcf ./backup/docker_backup."$(date +%Y%m%d)".tar.gz ./production/* 2>/dev/null && rm -rf ./production/*
   cp -r ./templates/* ./production/
   cp ./ssl.key ./production/docker*/nginx/
   cp ./ssl.crt ./production/docker*/nginx/
 else
-  echo "Please add ssl.key and ssl.crt files to this directory to continue..."
+  echo "Please add ssl.key and ssl.crt files to this directory and LA .zip file to directory you entered to continue..."
   pwd
   exit 0
 fi
@@ -179,5 +180,5 @@ elif [ "$VALUE" -eq "3" ] 2>/dev/null; then
   ln -s /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3 /opt/docker3
   cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3/apache-fpm/
 else
-  echo "Please re-run this script and write only numbers from 1 to 3"
+  echo "Please re-run this script and write only numbers from 1 to 3."
 fi

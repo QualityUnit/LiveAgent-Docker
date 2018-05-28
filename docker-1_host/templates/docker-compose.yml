@@ -1,0 +1,118 @@
+version: "2.2"
+
+services:
+  nginx:
+    build: ./nginx
+    container_name: "nginx"
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    cpus: NGINX_CPU_LIMIT
+    mem_limit: NGINX_MEM_LIMIT
+    ulimits:
+      nproc: 131072
+      nofile: 60000
+    links:
+      - "varnish"
+  varnish:
+    build: ./varnish
+    container_name: "varnish"
+    restart: unless-stopped
+    expose:
+      - 81
+    cpus: VARNISH_CPU_LIMIT
+    mem_limit: VARNISH_MEM_LIMIT
+    ulimits:
+      nproc: 131072
+      nofile: 15726
+    depends_on:
+      - apache-fpm
+  resque:
+    build: ./resquev4
+    container_name: "resque"
+    restart: unless-stopped
+    cpus: RESQUE_CPU_LIMIT
+    mem_limit: RESQUE_MEM_LIMIT
+    volumes:
+      - app:/opt/qu/liveagent
+    ulimits:
+      nofile: 96000
+    depends_on:
+      - apache-fpm
+  apache-fpm:
+    build: ./apache-fpm
+    container_name: "apache-fpm"
+    restart: unless-stopped
+    volumes:
+      - app:/var/www/liveagent
+      - /opt/geoip:/opt/geoip
+      - /var/run/clamav:/var/run/clamav
+    expose:
+      - 800
+    cpus: APACHE_CPU_LIMIT
+    mem_limit: APACHE_MEM_LIMIT
+    ulimits:
+      nproc: 30240
+      nofile: 65536
+    depends_on:
+      - mysql
+      - redis
+      - elasticsearch
+  mysql:
+    build: ./mariadb
+    container_name: "mysql"
+    restart: unless-stopped
+    volumes:
+      - dbdata:/var/lib/mysql
+    expose:
+      - 3306
+    cpus: MYSQL_CPU_LIMIT
+    mem_limit: MYSQL_MEM_LIMIT
+    ulimits:
+      nofile: 1020000
+  redis:
+    build: ./redis
+    container_name: "redis"
+    restart: unless-stopped
+    volumes:
+      - redisdata:/var/lib/redis
+    expose:
+      - 6379
+    cpus: REDIS_CPU_LIMIT
+    mem_limit: REDIS_MEM_LIMIT
+    sysctls:
+      - net.core.somaxconn=10000
+    ulimits:
+      nofile: 90032
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
+    container_name: elasticsearch
+    restart: unless-stopped
+    environment:
+      - "ES_JAVA_OPTS=-XmsMIN_HEAP_SIZE -XmxMAX_HEAP_SIZE"
+#      - xpack.security.enabled=false
+      - bootstrap.memory_lock=true
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    expose:
+      - 9200
+      - 9300
+    cpus: ELASTIC_CPU_LIMIT
+    mem_limit: ELASTIC_MEM_LIMIT
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 262144
+        hard: 262144
+volumes:
+  app:
+    driver: local
+  dbdata:
+    driver: local
+  redisdata:
+    driver: local
+  esdata:
+    driver: local

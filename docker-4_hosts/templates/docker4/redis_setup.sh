@@ -1,0 +1,1 @@
+docker exec -i mysql mysql -e"use liveagent; INSERT INTO qu_g_settings (name, value) VALUES ('redis_tracking_hosts', 'FLOAT_IP'); INSERT INTO qu_g_settings (name, value) VALUES ('resque_redis_host_port', 'FLOAT_IP:7379'); INSERT INTO qu_g_settings (name, value) VALUES ('resque_redis_enabled', 'Y'); UPDATE qu_g_settings SET value='Y' WHERE name='mod_rewrite_enabled';"

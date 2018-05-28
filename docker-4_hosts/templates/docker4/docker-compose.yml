@@ -1,0 +1,18 @@
+version: "2.2"
+
+services:
+  mysql:
+    build: ./mariadb
+    container_name: "mysql"
+    restart: unless-stopped
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - 3306:3306
+    cpus: MYSQL_CPU_LIMIT
+    mem_limit: MYSQL_MEM_LIMIT
+    ulimits:
+      nofile: 1020000
+volumes:
+  dbdata:
+    driver: local
