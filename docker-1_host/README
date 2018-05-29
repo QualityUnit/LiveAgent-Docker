@@ -8,18 +8,16 @@ Prerequisites:
 
 Build info
 
-    DO EVERY STEP ON ALL HOSTS UNTIL TOLD OTHERWISE
 1.  Install GIT (yum install git) and run "git clone https://github.com/QualityUnit/LiveAgent-Docker.git"
 2.  Enter version of docker setup you would like to install (1_host, 3_hosts...) and create valid ssl.crt and ssl.key files
 3.  Modify config.sh file and enter all requested info
 4.  Run config.sh file with "chmod +x ./config.sh && ./config.sh"
-5.  Enter "production/docker" directory on each host and run install_utils.sh script with "chmod +x ./install_utils.sh && ./install_utils.sh"
+5.  Enter "production" directory and run install_utils.sh script with "chmod +x ./install_utils.sh && ./install_utils.sh"
 6.  Run docker-compose after step 7 is done "/usr/local/bin/docker-compose up -d"
 7.  Set up database - docker exec -i mysql mysql -e"source /tmp/createdb.sql;" (one command)
 8.  Open your site for LA setup (site you entered in config.sh), STOP AFTER YOU LOG IN TO YOUR AGENT PANEL
-9.  Run "redis_setup.sh" on all 3 hosts with "chmod +x ./redis_setup.sh && ./redis_setup"
-10. Enter "your_private_ip:9000/haproxy_stats" into your browser, username: admin and password you entered in config.sh
-11. Enjoy
+9.  Run "redis_setup.sh" with "chmod +x ./redis_setup.sh && ./redis_setup"
+10. Enjoy
 
 VERSION UPDATE
 

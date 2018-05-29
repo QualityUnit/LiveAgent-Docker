@@ -28,6 +28,8 @@ services:
     environment:
       - "ES_JAVA_OPTS=-XmsMIN_HEAP_SIZE -XmxMAX_HEAP_SIZE"
       - xpack.security.enabled=false
+      - xpack.watcher.enabled=false
+      - xpack.monitoring.enabled=false
       - bootstrap.memory_lock=true
     volumes:
       - esdata:/usr/share/elasticsearch/data

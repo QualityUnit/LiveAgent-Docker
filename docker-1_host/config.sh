@@ -23,6 +23,10 @@ PRIVATE_IF_NAME=
 #For example LA_LOCATION=/tmp
 LA_LOCATION=
 
+#Did you already modified /etc/hosts by yourself? Please write yes or no
+#If no, this script will do it for you
+ETC_HOSTS_MODIFIED=
+
 #Enter the name of your site and alias
 #For example: support.ladesk.com and support.qualityunit.com
 SERVER_NAME=
