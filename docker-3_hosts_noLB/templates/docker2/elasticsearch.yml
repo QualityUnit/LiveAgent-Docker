@@ -8,6 +8,26 @@ network.publish_host: PRIVATE_IP_2
 discovery.zen.minimum_master_nodes: 2
 discovery.zen.ping.unicast.hosts: ["PRIVATE_IP_1", "PRIVATE_IP_2", "PRIVATE_IP_3"]
 
-http.cors.enabled: true
-http.cors.allow-origin: "*"
-http.cors.allow-headers: "Authorization"
+# AH (22.6.2015): To avoid delete_all_indices
+action.destructive_requires_name: true
+
+action.auto_create_index: +la_perf_pagevisit_v*,-*
+
+# The max size of the field data cache % of node heap space
+indices.fielddata.cache.size:  10%
+
+# The field data circuit breaker allows Elasticsearch to estimate the amount of
+# memory a field will require to be loaded into memory
+indices.breaker.fielddata.limit: 40%
+
+# The request circuit breaker allows Elasticsearch to prevent per-request data
+# structures (for example, memory used for calculating aggregations during a request)
+# from exceeding a certain amount of memory.
+indices.breaker.request.limit: 20%
+
+# The total circuit breaker wraps the request and fielddata circuit breakers to
+# ensure that the combination of the two doesn’t use more than 70% of the heap by default.
+indices.breaker.total.limit: 50%
+
+
+bootstrap.memory_lock: true

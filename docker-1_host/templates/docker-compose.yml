@@ -97,6 +97,7 @@ services:
       - bootstrap.memory_lock=true
     volumes:
       - esdata:/usr/share/elasticsearch/data
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     expose:
       - 9200
       - 9300

@@ -45,7 +45,7 @@ systemctl enable xinetd.service && systemctl start xinetd.service
 
 cp ./conf/mysqlchk /etc/xinetd.d/mysqlchk && rm -rf ./conf/mysqlchk
 chmod +x /etc/xinetd.d/mysqlchk
-cp ./conf/hprx_mysql_check.sh /etc/hprx_mysql_check.sh && ./conf/hprx_mysql_check.sh
+cp ./conf/hprx_mysql_check.sh /etc/hprx_mysql_check.sh && rm -rf ./conf/hprx_mysql_check.sh
 chmod +x /etc/hprx_mysql_check.sh
 echo "mysqlchk        3000/tcp" >> /etc/services
 
