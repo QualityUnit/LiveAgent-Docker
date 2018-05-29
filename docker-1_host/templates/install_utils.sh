@@ -13,7 +13,7 @@ yum update -y
 
 if [[ $(yum list installed geoip | grep 'base\|anaconda\|installed' | wc -l) == 1 ]]; then yum remove geoip -y; fi
 rpm -ivh ./conf/geoipupdate-2.2.2-2.el7.art.x86_64.rpm && rm -rf ./conf/geoipupdate-2.2.2-2.el7.art.x86_64.rpm
-mkdir -p ./geoip/
+mkdir -p ./geoip
 cp -r ./conf/GeoIP.conf /etc/GeoIP.conf && rm -rf ./conf/GeoIP.conf
 echo "#GEOIP" >> /etc/crontab
 echo "44 2 * * 6 root /usr/bin/geoipupdate -d /opt/LiveAgent-Docker/docker-1_host/production/geoip/ > /dev/null" >> /etc/crontab

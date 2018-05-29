@@ -67,6 +67,7 @@ SUPERVISOR_PASS=
 
 #DO NOT CHANGE ANYTHING AFTER THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
 ###############################################################################
+rm -rf `find ../docker* -type d | grep -v 'docker-1_host'` 2>/dev/null
 mkdir -p ./production; mkdir -p ./backup
 
 SSL_CRT=./ssl.crt

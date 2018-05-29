@@ -100,6 +100,7 @@ SUPERVISOR_PASS=
 echo "Are you on the 1st, 2nd, 3rd or 4th host right now? Write just a number: "
 read VALUE
 
+rm -rf `find ../docker* -type d | grep -v 'docker-4_hosts'` 2>/dev/null
 mkdir -p ./production; mkdir -p ./backup
 
 SSL_CRT=./ssl.crt
