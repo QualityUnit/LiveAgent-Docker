@@ -46,7 +46,7 @@ services:
     restart: unless-stopped
     volumes:
       - app:/var/www/liveagent
-      - /opt/geoip:/opt/geoip
+      - /opt/LiveAgent-Docker/docker-1_host/production/geoip:/opt/geoip
       - /var/run/clamav:/var/run/clamav
     expose:
       - 800
