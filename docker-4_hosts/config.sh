@@ -104,8 +104,8 @@ SSL_KEY=./ssl.key
 if [ -f $SSL_CRT ] && [ -f $SSL_KEY ] && [ -f $LA_LOCATION/la*.zip ]; then
   tar -zcf ./backup/docker_backup."$(date +%Y%m%d)".tar.gz ./production/* 2>/dev/null && rm -rf ./production/*
   cp -r ./templates/* ./production/
-  cp ./ssl.key ./production/docker*/nginx/
-  cp ./ssl.crt ./production/docker*/nginx/
+  echo ./production/docker*/nginx/ | xargs -n 1 cp ./ssl.key
+  echo ./production/docker*/nginx/ | xargs -n 1 cp ./ssl.crt
 else
   echo "Please add ssl.key and ssl.crt files to this directory and LA .zip file to directory you entered to continue..."
   pwd

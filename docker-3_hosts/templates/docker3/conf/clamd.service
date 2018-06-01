@@ -1,8 +1,8 @@
 [Unit]
 Description=Clam AntiVirus userspace daemon
 # Check for database existence
-ConditionPathExistsGlob=/opt/clamav/main.{c[vl]d,inc}
-ConditionPathExistsGlob=/opt/clamav/daily.{c[vl]d,inc}
+ConditionPathExistsGlob=/etc/clamav/main.{c[vl]d,inc}
+ConditionPathExistsGlob=/etc/clamav/daily.{c[vl]d,inc}
 
 [Service]
 ExecStart=/usr/sbin/clamd -c /etc/clamd.conf --foreground=true

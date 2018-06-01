@@ -13,13 +13,15 @@ yum update -y
 
 if [[ $(yum list installed geoip | grep 'base\|anaconda\|installed' | wc -l) == 1 ]]; then yum remove geoip -y; fi
 rpm -ivh ./conf/geoipupdate-2.2.2-2.el7.art.x86_64.rpm && rm -rf ./conf/geoipupdate-2.2.2-2.el7.art.x86_64.rpm
-mkdir -p ./geoip
+mkdir -p /etc/geoip
 cp -r ./conf/GeoIP.conf /etc/GeoIP.conf && rm -rf ./conf/GeoIP.conf
-echo "#GEOIP" >> /etc/crontab
-echo "44 2 * * 6 root /usr/bin/geoipupdate -d /opt/LiveAgent-Docker/docker-3_hosts/production/docker1/geoip/ > /dev/null" >> /etc/crontab
-echo "" >> /etc/crontab
-wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -P ./geoip/ && gunzip -f ./geoip/GeoLiteCity.dat.gz
-/usr/bin/geoipupdate -d /opt/LiveAgent-Docker/docker-3_hosts/production/docker1/geoip/ > /dev/null
+if [[ $(grep GEOIP /etc/crontab) == "" ]]; then
+  echo "#GEOIP" >> /etc/crontab
+  echo "44 2 * * 6 root /usr/bin/geoipupdate -d /etc/geoip/ > /dev/null" >> /etc/crontab
+  echo "" >> /etc/crontab
+fi
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -P /etc/geoip/ && gunzip -f /etc/geoip/GeoLiteCity.dat.gz
+/usr/bin/geoipupdate -d /etc/geoip/ > /dev/null
 
 #CLAMAV
 
@@ -29,16 +31,18 @@ wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamd-0.99.4
 rpm -ivh ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
 rm -rf ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
 yum -y install socat
-mkdir -p /opt/LiveAgent-Docker/docker-3_hosts/production/docker1/clamav && chown clamav:clamav /opt/LiveAgent-Docker/docker-3_hosts/production/docker1/clamav
+mkdir -p /etc/clamav && chown clamav:clamav /etc/clamav
 cp -r ./conf/freshclam.conf /etc/freshclam.conf && rm -rf ./conf/freshclam.conf
 /usr/bin/freshclam
 cp -r ./conf/clamd.service /etc/systemd/system/clamd.service && rm -rf ./conf/clamd.service
 cp -r ./conf/clamd.conf /etc/clamd.conf && rm -rf ./conf/clamd.conf
 systemctl start clamd.service && systemctl enable clamd.service
-echo "#CLAMD" >> /etc/crontab
-echo "25 3 * * * root /usr/bin/freshclam" >> /etc/crontab
-echo "0 5 * * * root service clamd restart " >> /etc/crontab
-echo "" >> /etc/crontab
+if [[ $(grep CLAMD /etc/crontab) == "" ]]; then
+  echo "#CLAMD" >> /etc/crontab
+  echo "25 3 * * * root /usr/bin/freshclam" >> /etc/crontab
+  echo "0 5 * * * root service clamd restart " >> /etc/crontab
+  echo "" >> /etc/crontab
+fi
 
 #FIREWALL
 
@@ -104,8 +108,10 @@ sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
 #PHP script
 
-echo "#PHP" >> /etc/crontab
-echo "*/1 * * * * root docker exec -i apache-fpm /usr/bin/php -q /var/www/liveagent/scripts/jobs.php" >> /etc/crontab
+if [[ $(grep PHP /etc/crontab) == "" ]]; then
+  echo "#PHP" >> /etc/crontab
+  echo "*/1 * * * * root docker exec -i apache-fpm /usr/bin/php -q /var/www/liveagent/scripts/jobs.php" >> /etc/crontab
+fi
 systemctl restart crond
 
 #ELASTICSEARCH vm.max_map_count set for production minimum

@@ -64,7 +64,7 @@ services:
     restart: unless-stopped
     volumes:
       - app:/var/www/liveagent
-      - /opt/LiveAgent-Docker/docker-3_hosts/production/docker3/geoip:/opt/geoip
+      - /etc/geoip:/opt/geoip
       - /var/run/clamav:/var/run/clamav
     ports:
       - 800:800

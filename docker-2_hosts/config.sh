@@ -69,6 +69,7 @@ MYSQLCHK_PASS=
 RSYNC_PASS=
 HAPROXY_PASS=
 SUPERVISOR_PASS=
+KEEPALIVED_PASS=
 
 #DO NOT CHANGE ANYTHING AFTER THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
 ###############################################################################
@@ -83,8 +84,8 @@ SSL_KEY=./ssl.key
 if [ -f $SSL_CRT ] && [ -f $SSL_KEY ] && [ -f $LA_LOCATION/la*.zip ]; then
   tar -zcf ./backup/docker_backup."$(date +%Y%m%d)".tar.gz ./production/* 2>/dev/null && rm -rf ./production/*
   cp -r ./templates/* ./production/
-  cp ./ssl.key ./production/docker*/nginx/
-  cp ./ssl.crt ./production/docker*/nginx/
+  echo ./production/docker*/nginx/ | xargs -n 1 cp ./ssl.key
+  echo ./production/docker*/nginx/ | xargs -n 1 cp ./ssl.crt
 else
   echo "Please add ssl.key and ssl.crt files to this directory and LA .zip file to directory you entered to continue..."
   pwd
@@ -143,11 +144,11 @@ grep -r "HAPROXY_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xar
 grep -r "SUPERVISOR_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/SUPERVISOR_PASS/$SUPERVISOR_PASS/g"
 
 if [ "$VALUE" -eq "1" ] 2>/dev/null; then
-  rm -rf ./production/docker2 ./production/docker3
+  rm -rf ./production/docker2
   ln -s /opt/LiveAgent-Docker/docker-2_hosts/production/docker1 /opt/docker1
   cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-2_hosts/production/docker1/apache-fpm/
 elif [ "$VALUE" -eq "2" ] 2>/dev/null; then
-  rm -rf ./production/docker1 ./production/docker3
+  rm -rf ./production/docker1
   ln -s /opt/LiveAgent-Docker/docker-2_hosts/production/docker2 /opt/docker2
   cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-2_hosts/production/docker2/apache-fpm/
 else
