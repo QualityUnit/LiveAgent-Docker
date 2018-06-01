@@ -22,6 +22,6 @@ RUN cd /opt/qu && unzip /opt/qu/php-resqueue-serial-resqu-v4.zip && \
     mv php-resqueue-serial-resqu-v4/* /opt/qu/php-resque-4/ && \
     rm -rf /opt/qu/php-resqueue-serial-resqu-v4.zip && \
     cd /opt/qu/php-resque-4 && curl -s http://getcomposer.org/installer | php && \
-    cd /opt/qu/php-resque-4 && php composer.phar install
+    cd /opt/qu/php-resque-4 && php composer.phar install --no-plugins --no-scripts
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
