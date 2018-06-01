@@ -15,7 +15,7 @@ RUN rm -rf /etc/nginx/conf.d/* && \
     openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
 
 COPY conf.d/* /etc/nginx/conf.d/
-COPY liveagent.local.conf /etc/nginx/sites.d/
+COPY liveagent.conf /etc/nginx/sites.d/
 COPY ssl.crt /etc/nginx/ssl/ssl.crt
 COPY ssl.key /etc/nginx/ssl/ssl.key
 

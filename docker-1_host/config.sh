@@ -23,12 +23,8 @@ PRIVATE_IF_NAME=
 #For example LA_LOCATION=/tmp
 LA_LOCATION=
 
-#Did you already modified /etc/hosts by yourself? Please write yes or no
-#If no, this script will do it for you
-ETC_HOSTS_MODIFIED=
-
 #Enter the name of your site and alias
-#For example: support.ladesk.com and support.qualityunit.com
+#For example: ladesk.com and www.ladesk.com
 SERVER_NAME=
 ALIAS_NAME=
 
@@ -90,7 +86,7 @@ grep -r "SERVER_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xarg
 grep -r "ALIAS_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ALIAS_NAME/$ALIAS_NAME/g"
 
 GREP_ETC_HOSTS=$(grep $SERVER_NAME /etc/hosts)
-if [ $ETC_HOSTS_MODIFIED = no ] && [ "$GREP_ETC_HOSTS" == "" ]
+if [ "$GREP_ETC_HOSTS" == "" ]
 then
   echo "$CUSTOMER_IP       $SERVER_NAME $ALIAS_NAME" >> /etc/hosts
 fi
