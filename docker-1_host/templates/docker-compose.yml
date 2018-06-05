@@ -8,6 +8,9 @@ services:
     ports:
       - 80:80
       - 443:443
+    expose:
+      - 8060
+      - 8070
     cpus: NGINX_CPU_LIMIT
     mem_limit: NGINX_MEM_LIMIT
     ulimits:
