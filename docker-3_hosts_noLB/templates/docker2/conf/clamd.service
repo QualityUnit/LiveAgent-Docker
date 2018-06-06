@@ -1,8 +1,8 @@
 [Unit]
 Description=Clam AntiVirus userspace daemon
 # Check for database existence
-ConditionPathExistsGlob=/opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker2/clamav/main.{c[vl]d,inc}
-ConditionPathExistsGlob=/opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker2/clamav/daily.{c[vl]d,inc}
+ConditionPathExistsGlob=/etc/clamav/main.{c[vl]d,inc}
+ConditionPathExistsGlob=/etc/clamav/daily.{c[vl]d,inc}
 
 [Service]
 ExecStart=/usr/sbin/clamd -c /etc/clamd.conf --foreground=true

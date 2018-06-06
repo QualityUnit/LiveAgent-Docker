@@ -9,7 +9,7 @@ Prerequisites:
 Build info
 
     DO EVERY STEP ON ALL HOSTS UNTIL TOLD OTHERWISE
-1.  Install GIT (yum install git) and run "git clone https://github.com/QualityUnit/LiveAgent-Docker.git"
+1.  Install GIT (yum install git) and run "cd /opt && git clone https://github.com/QualityUnit/LiveAgent-Docker.git"
 2.  Enter version of docker setup you would like to install (2_hosts...) and create valid ssl.crt and ssl.key files
 3.  Modify config.sh file and enter all requested info
 4.  Run config.sh file with "chmod +x ./config.sh && ./config.sh"
