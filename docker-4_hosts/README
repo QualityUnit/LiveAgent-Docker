@@ -8,7 +8,7 @@ Prerequisites:
 
 Build info
 
-    DO EVERY STEP ON ALL HOSTS UNTIL TOLD OTHERWISE
+    DO EVERY STEP ON ALL HOSTS UNLESS TOLD OTHERWISE
 1.  Install GIT (yum install git) and run "cd /opt && git clone https://github.com/QualityUnit/LiveAgent-Docker.git"
 2.  Enter version of docker setup you would like to install (1_host, 3_hosts...) and create valid ssl.crt and ssl.key files
 3.  Modify config.sh file and enter all requested info
@@ -25,11 +25,10 @@ Build info
 -    verify if replications are set on both hosts via "show slave status\G" (both Slave_IO_Running and Slave_SQL_Running must be Yes without errors)
 -    run "source /tmp/createdb.sql;" on the first host
 
-8.  Restart haproxy and xinetd on 1 and 2 and only xinetd on 3 and 4 - "service xinetd restart && docker restart haproxy"
-9.  Open your site for LA setup (site you entered in config.sh), STOP AFTER YOU LOG IN TO YOUR AGENT PANEL
-10. Run "after_install.sh" on all 4 hosts with "chmod +x ./after_install.sh && ./after_install" (on host 1 or 2 will this script report error about redis slave - it's OK)
-11. Enter "your_private_ip:9000/haproxy_stats" into your browser, username: admin and password you entered in config.sh for haproxy and check if all hosts are UP except one redis host as sentinels choose which redis host is master
-12. Enjoy
+8.  Restart haproxy and xinetd on 1st and 2nd host and only xinetd on 3rd and 4th - "service xinetd restart && docker restart haproxy"
+9.  Run "install_liveagent.sh" on the first host with "chmod +x ./install_liveagent.sh && ./install_liveagent"
+10. Enter "your_private_ip:9000/haproxy_stats" into your browser, username: admin and password you entered in config.sh for haproxy and check if all hosts are UP except one redis host as sentinels choose which redis host is master
+11. Enjoy
 
 VERSION UPDATE
 
@@ -51,8 +50,3 @@ USEFUL DOCKER COMMANDS
 *  docker cp <container_id>:/path/to/useful/file /local-path      - (useful when container won't start)
 *  docker exec -it container_name bash      - enter bash shell of container (examples of shells: bash, mysql, redis-cli...)
 *  /usr/local/bin/docker-compose up -d      - will bring up all containers stated in docker-compose.yml, when you destroy any container and it's image and you want to build it from the scratch with the same or different settings
-
-LIVEAGENT PLUGINS
-
-*  FLOAT_IP:10200 - put into IP address column when activating
-*  unix:///var/run/clamav/clamd.sock - put into IP address column when activating

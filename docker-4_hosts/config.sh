@@ -5,6 +5,12 @@
 # save all passwords somewhere safe
 #
 
+#LIVEAGENT INFO, in ADMIN_NAME please enter name and surename (for example ="John Smith")
+ADMIN_NAME=""
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
+LICENSE_CODE=
+
 #Enter public/private float IP of your liveagent site
 FLOAT_IP=
 
@@ -111,6 +117,12 @@ else
   pwd
   exit 0
 fi
+
+#LIVEAGENT
+grep -r "ADMIN_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ADMIN_NAME/$ADMIN_NAME/g"
+grep -r "ADMIN_EMAIL" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ADMIN_EMAIL/$ADMIN_EMAIL/g"
+grep -r "ADMIN_PASSWORD" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ADMIN_PASSWORD/$ADMIN_PASSWORD/g"
+grep -r "LICENSE_CODE" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/LICENSE_CODE/$LICENSE_CODE/g"
 
 #NETWORK
 grep -r "PRIVATE_IF_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IF_NAME/$PRIVATE_IF_NAME/g"

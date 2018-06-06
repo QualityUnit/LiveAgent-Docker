@@ -5,8 +5,8 @@
 # save all passwords somewhere safe
 #
 
-#LIVEAGENT INFO, in ADMIN_NAME please enter name and surename (for example =John Smith)
-ADMIN_NAME=
+#LIVEAGENT INFO, in ADMIN_NAME please enter name and surename (for example ="John Smith")
+ADMIN_NAME=""
 ADMIN_EMAIL=
 ADMIN_PASSWORD=
 LICENSE_CODE=
