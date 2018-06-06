@@ -14,10 +14,8 @@ Build info
 4.  Run config.sh file with "chmod +x ./config.sh && ./config.sh"
 5.  Enter "production" directory and run install_utils.sh script with "chmod +x ./install_utils.sh && ./install_utils.sh"
 6.  Run docker-compose after step 7 is done "/usr/local/bin/docker-compose up -d"
-7.  Set up database - docker exec -i mysql mysql -e"source /tmp/createdb.sql;" (one command)
-8.  Open your site for LA setup (site you entered in config.sh), STOP AFTER YOU LOG IN TO YOUR AGENT PANEL
-9.  Run "redis_setup.sh" with "chmod +x ./redis_setup.sh && ./redis_setup"
-10. Enjoy
+7.  Run "install_liveagent.sh" with "chmod +x ./install_liveagent.sh && ./install_liveagent.sh"
+8.  Enjoy
 
 VERSION UPDATE
 
