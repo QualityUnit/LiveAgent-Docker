@@ -11,7 +11,8 @@ ADMIN_EMAIL=
 ADMIN_PASSWORD=
 LICENSE_CODE=
 
-#Enter public/private float IP of your liveagent site
+#Enter public/private IP from which you will be accessing LiveAgent
+#(may be the same as PRIVATE_IP_1 if you will access it from internal network)
 FLOAT_IP=
 
 #Interface with private IP, for example: eth1 (needed for iptables rules)
@@ -121,6 +122,7 @@ grep -r "ADMIN_PASSWORD" ./production/* -l | grep -v config.sh | tr '\n' ' ' | x
 grep -r "LICENSE_CODE" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/LICENSE_CODE/$LICENSE_CODE/g"
 
 #NETWORK
+grep -r "FLOAT_IP" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/FLOAT_IP/$FLOAT_IP/g"
 grep -r "PRIVATE_IF_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IF_NAME/$PRIVATE_IF_NAME/g"
 grep -r "PRIVATE_IP_1" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_1/$PRIVATE_IP_1/g"
 grep -r "PRIVATE_IP_2" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_2/$PRIVATE_IP_2/g"
