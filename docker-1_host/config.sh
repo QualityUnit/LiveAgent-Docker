@@ -80,6 +80,7 @@ if [ -f $SSL_CRT ] && [ -f $SSL_KEY ] && [ -f $LA_LOCATION/la*.zip ]; then
   cp ./ssl.key ./production/nginx/
   cp ./ssl.crt ./production/nginx/
   cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-1_host/production/apache-fpm/
+  ln -s /opt/LiveAgent-Docker/docker-1_host/production /opt/docker1
 else
   echo "Please add ssl.key and ssl.crt files to this directory and LA .zip file to directory you entered to continue..."
   pwd
