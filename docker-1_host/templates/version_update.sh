@@ -35,12 +35,10 @@ FILE=$(ls -al la_*.zip | grep -o la_*.zip)
 if [ -f $FILE ]; then
    echo "Updating LiveAgent config files with the following version = $FILE"
    unzip -o $FILE -d /var/lib/docker/volumes/opt_app/_data/ | awk 'BEGIN {ORS=" "} {if(NR%50==0)print "."}'
+   docker exec -i apache-fpm /install.sh | grep -v 42S02
+   curl -k https://SERVER_NAME/index.php?action=rewrite_ok
+   rm -f $FILE
    echo -ne '\n'
-   echo "LiveAgent config files have been successfully updated, please enter your LiveAgent URL"
-   echo "to your web browser followed by /liveagent/install/ to start the update:"
-   echo ""
-   echo "for example: support.ladesk.com/liveagent/install/"
-   echo ""
    echo -e "${RED}Everything should be set after this step. Good luck.${NC}"
    echo ""
 else
