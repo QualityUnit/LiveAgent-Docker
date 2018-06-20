@@ -11,8 +11,7 @@ ADMIN_EMAIL=
 ADMIN_PASSWORD=
 LICENSE_CODE=
 
-#Enter public/private IP from which you will be accessing LiveAgent
-#(may be the same as PRIVATE_IP_1 if you will access it from internal network)
+#Enter public IP of your liveagent site
 FLOAT_IP=
 
 #Interface with private IP, for example: eth1 (needed for iptables rules)

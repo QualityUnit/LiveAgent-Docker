@@ -11,7 +11,7 @@ ADMIN_EMAIL=
 ADMIN_PASSWORD=
 LICENSE_CODE=
 
-#Enter public/private IP of your liveagent site (from which you will access LiveAgent)
+#Enter public IP of your liveagent site
 CUSTOMER_IP=
 
 #Do you want this script to set up iptables (firewall) for you?

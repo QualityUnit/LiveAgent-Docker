@@ -11,7 +11,7 @@ ADMIN_EMAIL=
 ADMIN_PASSWORD=
 LICENSE_CODE=
 
-#Enter public/private float IP of your liveagent site
+#Enter public float IP of your liveagent site
 FLOAT_IP=
 
 #Interface with private IP, for example: eth1 (needed for iptables rules)
