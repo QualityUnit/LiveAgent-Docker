@@ -5,13 +5,19 @@
 # save all passwords somewhere safe
 #
 
-#LIVEAGENT INFO, in ADMIN_NAME please enter name and surename (for example ="John Smith")
+#LIVEAGENT INFO
+#examples:
+#ADMIN_NAME="John Smith"
+#ADMIN_EMAIL=jsmith@gmail.com
+#ADMIN_PASSWORD=Changeme123!
+#LICENSE_CODE=dfs8b996
 ADMIN_NAME=""
 ADMIN_EMAIL=
 ADMIN_PASSWORD=
 LICENSE_CODE=
 
 #Enter public IP of your liveagent site
+#example: CUSTOMER_IP=154.18.0.31
 CUSTOMER_IP=
 
 #Do you want this script to set up iptables (firewall) for you?
@@ -19,9 +25,11 @@ CUSTOMER_IP=
 #directory before running this script, deafult IPtables rules are to only
 #expose ports 80 and 443 for liveagent to work and you to ssh from anywher,
 #everything else is blocked or accessible only by internal/docker network
+#example: IPTABLES_RULES=yes
 IPTABLES_RULES=
 
-#Interface with private IP, for example: eth1 (needed for iptables rules)
+#Interface with private IP, for example: PRIVATE_IF_NAME=eth1
+#(needed for iptables rules)
 PRIVATE_IF_NAME=
 
 #Enter path to location where LiveAgent .zip file is saved
@@ -30,11 +38,13 @@ PRIVATE_IF_NAME=
 LA_LOCATION=
 
 #Enter the name of your site and alias
-#For example: ladesk.com and www.ladesk.com
+#For example: SERVER_NAME=ladesk.com and ALIAS_NAME=www.ladesk.com
 SERVER_NAME=
 ALIAS_NAME=
 
-#Enter CPU limits - How many CPUs can container use
+#Specify how much of the available CPU resources a container can use. For
+#instance, if the host machine has 12 CPUs and you set MYSQL_CPU_LIMIT=2,
+#the container is guaranteed at most 2 of the CPUs.
 NGINX_CPU_LIMIT=1
 VARNISH_CPU_LIMIT=1
 HAPROXY_CPU_LIMIT=1
@@ -58,12 +68,14 @@ REDIS_MEM_LIMIT=2g
 ELASTIC_MEM_LIMIT=6g
 
 #Enter minimal and maximal heap size (mem limit) for Elasticsearch per host,
-#for example =4g. USUALLY HALF OF ELASTIC_MEM_LIMIT
+#for example MIN_HEAP_SIZE=4g or MIN_HEAP_SIZE=500m.
+#BEST PRACTICE IS HALF OF ELASTIC_MEM_LIMIT
 MIN_HEAP_SIZE=3g
 MAX_HEAP_SIZE=3g
 
 #Enter passwords for the following applications, remember that your security
 #depends on it so please use only strong passwords (dont use "/" in password)
+#example: DATABASE_PASSWORD=Chang3me123!
 DATABASE_PASSWORD=
 SUPERVISOR_PASS=
 
@@ -132,3 +144,10 @@ grep -r "MAX_HEAP_SIZE" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xa
 #OTHER
 grep -r "DATABASE_PASSWORD" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/DATABASE_PASSWORD/$DATABASE_PASSWORD/g"
 grep -r "SUPERVISOR_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/SUPERVISOR_PASS/$SUPERVISOR_PASS/g"
+
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+echo ""
+echo -e "${GREEN}OK${NC}"
+echo ""

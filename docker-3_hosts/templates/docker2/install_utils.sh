@@ -14,7 +14,7 @@ yum update -y
 if [[ $(yum list installed geoip | grep 'base\|anaconda\|installed' | wc -l) == 1 ]]; then yum remove geoip -y; fi
 rpm -ivh ./conf/geoipupdate-2.2.2-2.el7.art.x86_64.rpm && rm -rf ./conf/geoipupdate-2.2.2-2.el7.art.x86_64.rpm
 mkdir -p /etc/geoip
-cp -r ./conf/GeoIP.conf /etc/GeoIP.conf && rm -rf ./conf/GeoIP.conf
+\cp -r ./conf/GeoIP.conf /etc/GeoIP.conf && rm -rf ./conf/GeoIP.conf
 if [[ $(grep GEOIP /etc/crontab) == "" ]]; then
   echo "#GEOIP" >> /etc/crontab
   echo "44 2 * * 6 root /usr/bin/geoipupdate -d /etc/geoip/ > /dev/null" >> /etc/crontab
@@ -32,10 +32,10 @@ rpm -ivh ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-37
 rm -rf ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
 yum -y install socat
 mkdir -p /etc/clamav && chown clamav:clamav /etc/clamav
-cp -r ./conf/freshclam.conf /etc/freshclam.conf && rm -rf ./conf/freshclam.conf
+\cp -r ./conf/freshclam.conf /etc/freshclam.conf && rm -rf ./conf/freshclam.conf
 /usr/bin/freshclam
 cp -r ./conf/clamd.service /etc/systemd/system/clamd.service && rm -rf ./conf/clamd.service
-cp -r ./conf/clamd.conf /etc/clamd.conf && rm -rf ./conf/clamd.conf
+\cp -r ./conf/clamd.conf /etc/clamd.conf && rm -rf ./conf/clamd.conf
 systemctl start clamd.service && systemctl enable clamd.service
 if [[ $(grep CLAMD /etc/crontab) == "" ]]; then
   echo "#CLAMD" >> /etc/crontab
@@ -74,7 +74,7 @@ chmod +x /usr/local/bin/docker-compose
 #INSTALL KEEPALIVED
 
 yum install -y keepalived-1.3.5
-cp ./conf/keep* /etc/keepalived/keepalived.conf && rm -rf ./conf/keep*
+\cp ./conf/keep* /etc/keepalived/keepalived.conf && rm -rf ./conf/keep*
 systemctl start keepalived.service && systemctl enable keepalived.service
 
 #INSTALL XINETD
@@ -94,7 +94,7 @@ echo "mysqlchk        3000/tcp" >> /etc/services
 
 cp ./conf/rsync /etc/xinetd.d/rsync && rm -rf ./conf/rsync
 chmod +x /etc/xinetd.d/rsync
-cp ./conf/rsyncd.conf /etc/rsyncd.conf && rm -rf ./conf/rsyncd.conf
+\cp ./conf/rsyncd.conf /etc/rsyncd.conf && rm -rf ./conf/rsyncd.conf
 chmod 644 /etc/rsyncd.conf
 chmod 600 ./conf/rsyncd.secrets
 chmod 600 ./conf/rsync_pass

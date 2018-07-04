@@ -9,7 +9,7 @@
 # If the script is giving you the wrong URL, just use the correct one
 # followed by /liveagent/install
 #
-RED='\033[0;31m'
+GREEN='\033[0;32m'
 NC='\033[0m'
 
 clear
@@ -35,14 +35,16 @@ clear
 FILE=$(ls -al la_*.zip | grep -o la_*.zip)
 if [ -f $FILE ]; then
    echo "Updating LiveAgent config files with the following version = $FILE"
-   unzip -o $FILE -d /var/lib/docker/volumes/docker1_app/_data | awk 'BEGIN {ORS=" "} {if(NR%50==0)print "."}'
+   unzip -o $FILE -d /var/lib/docker/volumes/*_app/_data | awk 'BEGIN {ORS=" "} {if(NR%50==0)print "."}'
+   echo ""
+   echo ""
    docker exec -i apache-fpm /install.sh | grep -v 42S02
    curl -k https://SERVER_NAME/index.php?action=rewrite_ok
    rsync -a --password-file=/opt/docker1/conf/rsync_pass /var/lib/docker/volumes/docker1_app/_data/ replicator@PRIVATE_IP_2::liveagent
    rsync -a --password-file=/opt/docker1/conf/rsync_pass /var/lib/docker/volumes/docker1_app/_data/ replicator@PRIVATE_IP_3::liveagent
    rm -f $FILE
    echo -ne '\n'
-   echo -e "${RED}LiveAgent has been successfully updated, you can start your apache-fpm containers"
+   echo -e "${GREEN}LiveAgent has been successfully updated, you can start your apache-fpm containers"
    echo -e "and get back to work.${NC}"
    echo ""
 else

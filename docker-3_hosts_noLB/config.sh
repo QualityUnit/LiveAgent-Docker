@@ -5,16 +5,23 @@
 # save all passwords somewhere safe
 #
 
-#LIVEAGENT INFO, in ADMIN_NAME please enter name and surename (for example ="John Smith")
+#LIVEAGENT INFO
+#examples:
+#ADMIN_NAME="John Smith"
+#ADMIN_EMAIL=jsmith@gmail.com
+#ADMIN_PASSWORD=Changeme123!
+#LICENSE_CODE=dfs8b996
 ADMIN_NAME=""
 ADMIN_EMAIL=
 ADMIN_PASSWORD=
 LICENSE_CODE=
 
 #Enter public IP of your liveagent site
+#example: FLOAT_IP=154.18.0.31
 FLOAT_IP=
 
-#Interface with private IP, for example: eth1 (needed for iptables rules)
+#Interface with private IP, for example: PRIVATE_IF_NAME=eth1
+#(needed for iptables rules)
 PRIVATE_IF_NAME=
 
 #Enter private IP of the FIRST host
@@ -36,15 +43,16 @@ LA_LOCATION=
 #directory before running this script, deafult IPtables rules are to only
 #expose ports 80 and 443 for liveagent to work and you to ssh from anywher,
 #everything else is blocked or accessible only by internal/docker network
+#example: IPTABLES_RULES=yes
 IPTABLES_RULES=
 
 #Enter the name of your site and alias
-#For example: ladesk.com and www.ladesk.com
+#For example: SERVER_NAME=ladesk.com and ALIAS_NAME=www.ladesk.com
 SERVER_NAME=
 ALIAS_NAME=
 
 #Enter path with quotes to location where Mysql backup files should be saved
-#Do not end it with "/" on the end. For example = "/app/DBbackups"
+#Do not end it with "/" on the end. For example: BACKUP_PATH="/app/DBbackups"
 BACKUP_PATH=""
 
 #Enter when the backups should be running (0-23) server time
@@ -55,7 +63,9 @@ BACKUP_RUN=
 #USE ONLY WHOLE NUMBERS, for example: X_DAYS_OLDER=14 (for 2 weeks)
 X_DAYS_OLDER=
 
-#Enter CPU limits - How many CPUs can container use
+#Specify how much of the available CPU resources a container can use. For
+#instance, if the host machine has 12 CPUs and you set MYSQL_CPU_LIMIT=2,
+#the container is guaranteed at most 2 of the CPUs.
 NGINX_CPU_LIMIT=1
 VARNISH_CPU_LIMIT=1
 HAPROXY_CPU_LIMIT=1
@@ -79,12 +89,14 @@ REDIS_MEM_LIMIT=2g
 ELASTIC_MEM_LIMIT=6g
 
 #Enter minimal and maximal heap size (mem limit) for Elasticsearch per host,
-#for example =4g. USUALLY HALF OF ELASTIC_MEM_LIMIT
+#for example MIN_HEAP_SIZE=4g or MIN_HEAP_SIZE=500m.
+#BEST PRACTICE IS HALF OF ELASTIC_MEM_LIMIT
 MIN_HEAP_SIZE=3g
 MAX_HEAP_SIZE=3g
 
 #Enter passwords for the following applications, remember that your security
 #depends on it so please use only strong passwords (dont use "/" in password)
+#example: DATABASE_PASSWORD=Chang3me123!
 DATABASE_PASSWORD=
 MYSQLCHK_PASS=
 MYSQL_REPLICATOR_PASS=
@@ -190,4 +202,12 @@ elif [ "$VALUE" -eq "3" ] 2>/dev/null; then
   cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-3_hosts_noLB/production/docker3/apache-fpm/
 else
   echo "Please re-run this script and write only numbers from 1 to 3."
+  exit 0
 fi
+
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+echo ""
+echo -e "${GREEN}OK${NC}"
+echo ""

@@ -1,29 +1,38 @@
 LiveAgent docker infra setup for 2 servers with LB on all of them, mysql, redis and elasticsearch on the 1st one.
 
-Prerequisites:
+PREREQUISITES:
 
 * 2 physical/virtual hosts with enough RAM, CPU and disk space
 * CENTOS 7 with SUDO privileges on all hosts
 * compatible LA version (The newest should do)
 
-Build info
+BUILD INFO
 
     DO EVERY STEP ON ALL HOSTS UNLESS TOLD OTHERWISE
 1.  Install GIT (yum install git) and run "cd /opt && git clone https://github.com/QualityUnit/LiveAgent-Docker.git"
 2.  Enter version of docker setup you would like to install (2_hosts...) and create valid ssl.crt and ssl.key files
 3.  Modify config.sh file and enter all requested info
-4.  Run config.sh file with "chmod +x ./config.sh && ./config.sh"
-5.  Enter "production/docker" directory on each host and run install_utils.sh script with "chmod +x ./install_utils.sh && ./install_utils.sh"
+4.  Run "source config.sh"
+5.  Enter "production/docker" directory on each host and run "source install_utils.sh"
 6.  Run docker-compose on both hosts after step 5 is done "/usr/local/bin/docker-compose up -d"
 7.  Restart haproxy and xinetd on both hosts - "service xinetd restart && docker restart haproxy"
-8.  Run "install_liveagent.sh" on the first host with "chmod +x ./install_liveagent.sh && ./install_liveagent"
+8.  Run "source install_liveagent.sh" on the first host
 9.  Enter "your_private_ip:9000/haproxy_stats" into your browser, username: admin and password you entered in config.sh for haproxy and check if all hosts are UP
 10. Enjoy
 
-VERSION UPDATE
+BUILD CHANGES WHEN ALREADY IN PRODUCTION
+
+* If you want to change some parameters of any of the containers, you can do it 2 ways:
+1. you can go to container with "docker exec -it container_name bash" command and change your setting there and restart
+   container afterwards for changes to take effect with "docker restart container_name"
+2. you can modify "templates" directory and run "config.sh" script again, this will backup your old configs to "backup"
+   directory and create new "production" dir and you can just restart any of your containers for changes to take effect...
+   THIS STEP WILL NOT DELETE ANY OF YOUR DATA AS YOU ARE ONLY CHANGING THE WAY CONTAINERS ARE CREATED
+
+LIVEAGENT VERSION UPDATE
 
 *  download/move new version of LA .zip file to "/opt/docker1" directory
-*  run version_update.sh script - "chmod +x version_update.sh && ./version_update.sh"
+*  run "source version_update.sh"
 *  follow instructions from the script
 
 USEFUL DOCKER COMMANDS
