@@ -25,11 +25,9 @@ wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -P /e
 
 #CLAMAV
 
-wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamav-0.99.4-3788.el7.art.x86_64.rpm -P ./conf
-wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamav-db-0.99.4-3788.el7.art.x86_64.rpm -P ./conf
-wget http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/clamd-0.99.4-3788.el7.art.x86_64.rpm -P ./conf
-rpm -ivh ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
-rm -rf ./conf/clamav-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamav-db-0.99.4-3788.el7.art.x86_64.rpm ./conf/clamd-0.99.4-3788.el7.art.x86_64.rpm
+yum install json-c -y
+rpm -ivh ./conf/clamav-0.100.1-5487.el7.art.x86_64.rpm ./conf/clamav-db-0.100.1-5487.el7.art.x86_64.rpm ./conf/clamd-0.100.1-5487.el7.art.x86_64.rpm
+rm -rf ./conf/clamav-0.100.1-5487.el7.art.x86_64.rpm ./conf/clamav-db-0.100.1-5487.el7.art.x86_64.rpm ./conf/clamd-0.100.1-5487.el7.art.x86_64.rpm
 yum -y install socat
 mkdir -p /etc/clamav && chown clamav:clamav /etc/clamav
 \cp -r ./conf/freshclam.conf /etc/freshclam.conf && rm -rf ./conf/freshclam.conf
