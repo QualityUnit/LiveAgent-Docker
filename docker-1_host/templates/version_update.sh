@@ -39,7 +39,8 @@ if [ -f $FILE ]; then
    echo ""
    docker exec -i apache-fpm /install.sh | grep -v 42S02
    curl -k https://SERVER_NAME/index.php?action=rewrite_ok
-   rm -f $FILE
+   rm -f ./apache-fpm/la*
+   mv $FILE ./apache-fpm
    echo -ne '\n'
    echo -e "${GREEN}LiveAgent version has been successfully updated.${NC}"
    echo ""

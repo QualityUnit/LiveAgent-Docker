@@ -31,7 +31,7 @@ RUN unzip /var/www/la* -d /var/www/liveagent
 COPY liveagent.conf /etc/httpd/sites.d/liveagent.conf
 COPY settings.php /var/www/liveagent/accounts/settings.php
 RUN chmod -R 777 /var/www/liveagent/accounts && \
-    chown apache:apache /var/www/liveagent/accounts/settings.php
+    chown -R apache:apache /var/www/liveagent/accounts
 
 #GEOIP
 RUN ln -s /opt/geoip/GeoLiteCity.dat /var/www/liveagent/plugins/GeoIp/GeoLiteCity.dat
