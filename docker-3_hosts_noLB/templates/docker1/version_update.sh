@@ -44,6 +44,8 @@ if [ -f $FILE ]; then
    rsync -a --password-file=/opt/docker1/conf/rsync_pass /var/lib/docker/volumes/docker1_app/_data/ replicator@PRIVATE_IP_3::liveagent
    rm -f ./apache-fpm/la*
    mv $FILE ./apache-fpm
+   rsync -a --password-file=/opt/docker1/conf/rsync_pass ./apache-fpm/$FILE replicator@PRIVATE_IP_2::liveagent1/la_latest.zip
+   rsync -a --password-file=/opt/docker1/conf/rsync_pass ./apache-fpm/$FILE replicator@PRIVATE_IP_3::liveagent1/la_latest.zip
    echo -ne '\n'
    echo -e "${GREEN}LiveAgent has been successfully updated, you can start your apache-fpm containers"
    echo -e "and get back to work.${NC}"

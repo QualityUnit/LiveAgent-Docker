@@ -197,11 +197,11 @@ if [ "$VALUE" -eq "1" ] 2>/dev/null; then
 elif [ "$VALUE" -eq "2" ] 2>/dev/null; then
   rm -rf ./production/docker1 ./production/docker3
   ln -s /opt/LiveAgent-Docker/docker-3_hosts/production/docker2 /opt/docker2
-  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-3_hosts/production/docker2/apache-fpm/
+  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-3_hosts/production/docker2/apache-fpm/la_latest.zip
 elif [ "$VALUE" -eq "3" ] 2>/dev/null; then
   rm -rf ./production/docker1 ./production/docker2
   ln -s /opt/LiveAgent-Docker/docker-3_hosts/production/docker3 /opt/docker3
-  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-3_hosts/production/docker3/apache-fpm/
+  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-3_hosts/production/docker3/apache-fpm/la_latest.zip
 else
   echo "Please re-run this script and write only numbers from 1 to 3"
   exit 0

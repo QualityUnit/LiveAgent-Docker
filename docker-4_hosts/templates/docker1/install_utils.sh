@@ -89,6 +89,7 @@ chmod 644 /etc/rsyncd.conf
 chmod 600 ./conf/rsyncd.secrets
 chmod 600 ./conf/rsync_pass
 chown root:root ./conf/rsyncd.secrets ./conf/rsync_pass
+systemctl enable rsyncd; systemctl start rsyncd
 
 #SELINUX disable
 

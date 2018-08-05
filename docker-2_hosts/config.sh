@@ -174,7 +174,7 @@ if [ "$VALUE" -eq "1" ] 2>/dev/null; then
 elif [ "$VALUE" -eq "2" ] 2>/dev/null; then
   rm -rf ./production/docker1
   ln -s /opt/LiveAgent-Docker/docker-2_hosts/production/docker2 /opt/docker2
-  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-2_hosts/production/docker2/apache-fpm/
+  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-2_hosts/production/docker2/apache-fpm/la_latest.zip
 else
   echo "Please re-run this script and write only number 1 or 2"
   exit 0
