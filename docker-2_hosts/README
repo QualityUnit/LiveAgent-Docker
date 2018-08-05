@@ -4,7 +4,7 @@ PREREQUISITES:
 
 * 2 physical/virtual hosts with enough RAM, CPU and disk space
 * CENTOS 7 with SUDO privileges on all hosts
-* compatible LA version (The newest should do)
+* compatible LA version .zip file stored on all hosts
 
 BUILD INFO
 

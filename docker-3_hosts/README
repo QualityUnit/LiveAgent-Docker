@@ -4,7 +4,7 @@ PREREQUISITES:
 
 * 3 physical/virtual hosts with enough RAM, CPU and disk space
 * CENTOS 7 with SUDO privileges on all hosts
-* compatible LA version (The newest should do)
+* compatible LA version .zip file stored on all hosts
 
 BUILD INFO
 
@@ -15,15 +15,9 @@ BUILD INFO
 4.  Run "source config.sh"
 5.  Enter "production/docker" directory on each host and run "source install_utils.sh"
 6.  Run docker-compose on each host after step 5 is done "/usr/local/bin/docker-compose up -d"
-
-7.  Set up database and replication on hosts 1 and 2:
-
--    run "docker exec -it mysql bash" on both hosts
--    run "mysql" and then "source /tmp/initdb.sql;" on both hosts
--    run "source /tmp/replication.sql;" on both host
--    verify if replications are set on both hosts via "show slave status\G" (both Slave_IO_Running and Slave_SQL_Running must be Yes without errors)
--    run "source /tmp/createdb.sql;" on the first host
-
+7.  Run the following command on hosts 1 and 2 ("" included) - docker exec -i mysql mysql -e"source /tmp/initdb.sql;"
+    - there will be an error on the 1st host about "connecting to master" but it should disappear after 60 seconds
+    - verify if mysql replication is set on both hosts via "show slave status\G" (both Slave_IO_Running and Slave_SQL_Running must be Yes without errors)
 8.  Restart haproxy and xinetd on all hosts - "service xinetd restart && docker restart haproxy"
 9.  Run "source install_liveagent.sh" on the first host
 10. Enter "your_private_ip:9000/haproxy_stats" into your browser, username: admin and password you entered in config.sh for haproxy and check if all hosts are UP except one redis host as sentinels choose which redis host is master

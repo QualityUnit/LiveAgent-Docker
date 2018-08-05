@@ -8,7 +8,6 @@ RUN yum clean all && \
 
 COPY server.cnf /etc/my.cnf.d/server.cnf
 COPY initdb.sql /tmp/initdb.sql
-COPY replication.sql /tmp/replication.sql
 
 ENV HOME /var/lib/mysql
 
