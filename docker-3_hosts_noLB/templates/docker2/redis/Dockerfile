@@ -2,7 +2,7 @@ FROM centos:7
 
 RUN yum clean all && \
     yum install epel-release -y && \
-    yum install redis-3.2.10 -y && \
+    yum install redis-3.2.12 -y && \
     yum clean all
 
 COPY redis.conf /etc/redis.conf
