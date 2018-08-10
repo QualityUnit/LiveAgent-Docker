@@ -17,7 +17,8 @@ socket=/var/lib/mysql/mysql.sock
 tmpdir=/tmp/
 gtid-ignore-duplicates=OFF
 
-
+auto_increment_increment=2
+auto_increment_offset=1
 
 log_bin=mysql-bin
 expire_logs_days=4
