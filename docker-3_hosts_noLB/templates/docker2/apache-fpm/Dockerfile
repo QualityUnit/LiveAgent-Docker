@@ -4,7 +4,7 @@ COPY remi-php70.repo /etc/yum.repos.d/remi-php70.repo
 
 RUN yum clean all && \
     yum-config-manager --enable remi-php70 && \
-    yum install -y http://rpms.famillecollet.com/enterprise/7/remi/x86_64//gd-last-2.2.5-1.el7.remi.x86_64.rpm && \
+    yum install -y http://rpms.famillecollet.com/enterprise/7/remi/x86_64//gd-last-2.2.5-5.el7.remi.x86_64.rpm && \
     yum -y install httpd php-fpm php-pecl-redis php-pecl-yaml php-cli php-xml php-pdo php-mysqlnd php-gd php-opcache php-bcmath php-mbstring php-soap php-ldap php-process iproute unzip && \
     yum clean all
 
