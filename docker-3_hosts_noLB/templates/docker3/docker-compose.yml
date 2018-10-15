@@ -2,7 +2,7 @@ version: "2.2"
 
 services:
   resque:
-    build: ./resquev4
+    build: ./resquev5
     container_name: "resque"
     restart: unless-stopped
     cpus: RESQUE_CPU_LIMIT
