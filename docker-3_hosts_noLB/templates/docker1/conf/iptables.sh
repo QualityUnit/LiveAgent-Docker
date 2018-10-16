@@ -13,8 +13,8 @@
 #
 # Set default policies for INPUT, FORWARD and OUTPUT chains
 #
- iptables -P INPUT DROP
- iptables -P FORWARD DROP
+ iptables -P INPUT ACCEPT
+ iptables -P FORWARD ACCEPT
  iptables -P OUTPUT ACCEPT
 #
 # Set access for localhost/docker and internal network
