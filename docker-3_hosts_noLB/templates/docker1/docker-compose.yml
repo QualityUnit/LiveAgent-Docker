@@ -34,9 +34,8 @@ services:
     build: ./haproxy
     container_name: "haproxy"
     restart: unless-stopped
-    expose:
-      - 82
     ports:
+      - 82:82
       - 4306:4306
       - 7379:7379
       - 9000:9000
