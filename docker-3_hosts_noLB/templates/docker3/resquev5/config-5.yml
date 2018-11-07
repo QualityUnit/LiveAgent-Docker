@@ -13,7 +13,7 @@ redis:
 
 task_include_path: "/opt/qu/liveagent/"
 
-node_id: 1_resque
+node_id: 3_resque
 
 allocators:
     job-count: 1

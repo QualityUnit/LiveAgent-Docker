@@ -47,18 +47,6 @@ services:
       nofile: 45000
     depends_on:
       - apache-fpm
-  resque:
-    build: ./resquev5
-    container_name: "resque"
-    restart: unless-stopped
-    cpus: RESQUE_CPU_LIMIT
-    mem_limit: RESQUE_MEM_LIMIT
-    volumes:
-      - app:/opt/qu/liveagent
-    ulimits:
-      nofile: 96000
-    depends_on:
-      - apache-fpm
   apache-fpm:
     build: ./apache-fpm
     container_name: "apache-fpm"
