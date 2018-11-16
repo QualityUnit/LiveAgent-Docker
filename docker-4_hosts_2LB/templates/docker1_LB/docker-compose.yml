@@ -1,0 +1,48 @@
+version: "2.2"
+
+services:
+  nginx:
+    build: ./nginx
+    container_name: "nginx"
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+      - 8060:8060
+      - 8070:8070
+    cpus: NGINX_CPU_LIMIT
+    mem_limit: NGINX_MEM_LIMIT
+    ulimits:
+      nproc: 131072
+      nofile: 60000
+    links:
+      - "varnish"
+  varnish:
+    build: ./varnish
+    container_name: "varnish"
+    restart: unless-stopped
+    expose:
+      - 81
+    cpus: VARNISH_CPU_LIMIT
+    mem_limit: VARNISH_MEM_LIMIT
+    ulimits:
+      nproc: 131072
+      nofile: 15726
+    depends_on:
+      - haproxy
+  haproxy:
+    build: ./haproxy
+    container_name: "haproxy"
+    restart: unless-stopped
+    expose:
+      - 82
+    ports:
+      - 4306:4306
+      - 7379:7379
+      - 9000:9000
+      - 10200:10200
+    cpus: HAPROXY_CPU_LIMIT
+    mem_limit: HAPROXY_MEM_LIMIT
+    ulimits:
+      nproc: 131072
+      nofile: 45000

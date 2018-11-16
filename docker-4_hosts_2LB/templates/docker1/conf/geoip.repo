@@ -1,0 +1,7 @@
+[geoip]
+name=CentOS / Red Hat Enterprise Linux $releasever - atomic
+enabled=1
+gpgkey0=https://www.atomicorp.com/RPM-GPG-KEY.art.txt
+gpgkey1=https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt
+mirrorlist=http://updates.atomicorp.com/channels/mirrorlist/atomic/centos-$releasever-$basearch
+gpgcheck=0

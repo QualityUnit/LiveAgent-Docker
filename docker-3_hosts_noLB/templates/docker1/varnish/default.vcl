@@ -12,7 +12,7 @@ backend default {
     .port = "82";
 }
 
-sub vcl_recv {   
+sub vcl_recv {
      if (req.method == "BAN") {
         if (req.http.host) {
             ban("req.http.host ~ " + req.http.host);
@@ -32,7 +32,7 @@ sub vcl_recv {
      } else {
         set req.http.X-Forwarded-For = client.ip;
      }
-     
+
      if (req.http.Accept-Encoding) {
         if (req.url ~ "\.(jpg|png|gif|gz|tgz|bz2|tbz|mp3|ogg|mp4|swf)") {
           # No point in compressing these
@@ -46,8 +46,8 @@ sub vcl_recv {
           unset req.http.Accept-Encoding;
         }
       }
-      
-      
+
+
 
      if (req.method != "GET" &&
        req.method != "HEAD" &&
@@ -59,16 +59,16 @@ sub vcl_recv {
          /* Non-RFC2616 or CONNECT which is weird. */
          return (pipe);
      }
-     
+
      if (req.method != "GET" && req.method != "HEAD") {
          /* We only deal with GET and HEAD by default */
          return (pass);
      }
-     
+
      if (req.http.Cookie ~ "be_typo_user") {
          return (pass);
      }
-     
+
      if (req.url ~ "^[^?]*\.(jpg|png|gif|gz|tgz|bz2|tbz|mp3|ogg|mp4|swf|html|js|css|zip|pdf|svg)(\?.*)?$") {
         if (req.http.Cookie) {
             set req.http.Cookie = ";" + req.http.Cookie;
@@ -91,7 +91,7 @@ sub vcl_recv {
      set bereq.http.connection = "close";
      return (pipe);
  }
- 
+
   sub vcl_pass {
      return (fetch);
  }
@@ -104,9 +104,10 @@ sub vcl_backend_response {
     } else {
        set beresp.grace = 15s;
     }
-    
+
     if (beresp.http.content-type ~ "(text|javascript|svg)") {
       set beresp.do_gzip = true;
+      set beresp.do_stream = false;
     }
 
     if (beresp.ttl > 14400s) {
@@ -159,4 +160,3 @@ sub vcl_backend_error {
 "} );
     return (deliver);
 }
-
