@@ -132,7 +132,6 @@ grep -r "HAPROXY_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' 
 
 #OTHER
 grep -r "KEEPALIVED_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/KEEPALIVED_PASS/$KEEPALIVED_PASS/g"
-grep -r "RSYNC_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/RSYNC_PASS/$RSYNC_PASS/g"
 grep -r "HAPROXY_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/HAPROXY_PASS/$HAPROXY_PASS/g"
 
 if [ "$VALUE" -eq "1" ] 2>/dev/null; then
