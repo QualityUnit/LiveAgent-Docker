@@ -108,7 +108,6 @@ grep -r "PRIVATE_IP_2" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xar
 grep -r "PRIVATE_IP_3" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_3/$PRIVATE_IP_3/g"
 grep -r "PRIVATE_IP_4" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_4/$PRIVATE_IP_4/g"
 grep -r "SERVER_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/SERVER_NAME/$SERVER_NAME/g"
-grep -r "ALIAS_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ALIAS_NAME/$ALIAS_NAME/g"
 
 GREP_ETC_HOSTS=$(grep $SERVER_NAME /etc/hosts)
 if [ "$GREP_ETC_HOSTS" == "" ] && [ "$VALUE" -eq "1" ] || [ "$VALUE" -eq "2" ]
