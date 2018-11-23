@@ -8,7 +8,7 @@ log:
     logstash_version: 1
 
 redis:
-    hostname: PRIVATE_IP_1
+    hostname: FLOAT_IP
     port: 7379
 
 task_include_path: "/opt/qu/liveagent/"
