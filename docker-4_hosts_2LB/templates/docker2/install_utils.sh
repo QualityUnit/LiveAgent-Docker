@@ -86,14 +86,6 @@ setenforce 0
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
-#PHP script
-
-if [[ $(grep PHP /etc/crontab) == "" ]]; then
-  echo "#PHP" >> /etc/crontab
-  echo "*/1 * * * * root docker exec -i apache-fpm /usr/bin/php -q /var/www/liveagent/scripts/jobs.php" >> /etc/crontab
-fi
-systemctl restart crond
-
 #ELASTICSEARCH vm.max_map_count set for production minimum
 
 echo "vm.max_map_count=262144" >> /etc/sysctl.conf

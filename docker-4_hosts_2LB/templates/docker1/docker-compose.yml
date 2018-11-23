@@ -45,6 +45,20 @@ services:
         hard: 262144
     cap_add:
       - IPC_LOCK
+  redis:
+    build: ./redis
+    container_name: "redis"
+    restart: unless-stopped
+    volumes:
+      - redisdata:/var/lib/redis
+    ports:
+      - 6379:6379
+    sysctls:
+      - net.core.somaxconn=10000
+    cpus: REDIS_CPU_LIMIT
+    mem_limit: REDIS_MEM_LIMIT
+    ulimits:
+      nofile: 90032
   sentinel:
     build: ./redis-sentinel
     container_name: "sentinel"

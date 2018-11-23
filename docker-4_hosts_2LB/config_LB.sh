@@ -18,6 +18,12 @@ ADMIN_PASSWORD=test.com
 #example: FLOAT_IP=154.18.0.31
 FLOAT_IP=173.168.1.135
 
+#Enter private IP of the FIRST loadbalancer
+PRIVATE_IP_LB_1=173.168.1.35
+
+#Enter private IP of the SECOND loadbalancer
+PRIVATE_IP_LB_2=173.168.1.36
+
 #Enter private IP of the FIRST host
 PRIVATE_IP_1=173.168.1.31
 
@@ -51,9 +57,9 @@ ALIAS_NAME=liveagent.local
 #Specify how much of the available CPU resources a container can use. For
 #instance, if the host machine has 12 CPUs and you set MYSQL_CPU_LIMIT=2,
 #the container is guaranteed at most 2 of the CPUs.
-NGINX_CPU_LIMIT=4
+NGINX_CPU_LIMIT=1
 VARNISH_CPU_LIMIT=1
-HAPROXY_CPU_LIMIT=2
+HAPROXY_CPU_LIMIT=1
 
 #Enter memory limits for containers, if memory exceeds the limit,
 #the container is restarted because of OOM. It is better this way because
@@ -100,6 +106,8 @@ fi
 #NETWORK
 grep -r "PRIVATE_IF_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IF_NAME/$PRIVATE_IF_NAME/g"
 grep -r "FLOAT_IP" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/FLOAT_IP/$FLOAT_IP/g"
+grep -r "PRIVATE_IP_LB_1" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_LB_1/$PRIVATE_IP_LB_1/g"
+grep -r "PRIVATE_IP_LB_2" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_LB_2/$PRIVATE_IP_LB_2/g"
 grep -r "PRIVATE_IP_1" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_1/$PRIVATE_IP_1/g"
 grep -r "PRIVATE_IP_2" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_2/$PRIVATE_IP_2/g"
 grep -r "PRIVATE_IP_3" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_3/$PRIVATE_IP_3/g"

@@ -54,27 +54,11 @@ IPTABLES_RULES=yes
 SERVER_NAME=liveagent.local
 ALIAS_NAME=liveagent.local
 
-#Enter path with quotes to location where Mysql backup files should be saved
-#Do not end it with "/" on the end. For example: BACKUP_PATH="/app/DBbackups"
-BACKUP_PATH="/opt"
-
-#Enter when the backups should be running (0-23) server time
-#USE ONLY WHOLE NUMBERS, for example: BACKUP_RUN=2 (for 2 AM)
-BACKUP_RUN=2
-
-#Enter how many days should Mysql backup file be saved before removal
-#USE ONLY WHOLE NUMBERS, for example: X_DAYS_OLDER=14 (for 2 weeks)
-X_DAYS_OLDER=2
-
 #Specify how much of the available CPU resources a container can use. For
 #instance, if the host machine has 12 CPUs and you set MYSQL_CPU_LIMIT=2,
 #the container is guaranteed at most 2 of the CPUs.
-NGINX_CPU_LIMIT=1
-VARNISH_CPU_LIMIT=1
-HAPROXY_CPU_LIMIT=1
 RESQUE_CPU_LIMIT=1
-APACHE_CPU_LIMIT=3
-MYSQL_CPU_LIMIT=2
+APACHE_CPU_LIMIT=1
 REDIS_CPU_LIMIT=1
 ELASTIC_CPU_LIMIT=1
 
@@ -82,12 +66,8 @@ ELASTIC_CPU_LIMIT=1
 #the container is restarted because of OOM. It is better this way because
 #all other containers keep running, if there were no container limits,
 #you could run out of hosts resources and the whole server would go down
-NGINX_MEM_LIMIT=1g
-VARNISH_MEM_LIMIT=2g
-HAPROXY_MEM_LIMIT=500m
 RESQUE_MEM_LIMIT=3g
 APACHE_MEM_LIMIT=6g
-MYSQL_MEM_LIMIT=8g
 REDIS_MEM_LIMIT=2g
 ELASTIC_MEM_LIMIT=6g
 
@@ -100,13 +80,9 @@ MAX_HEAP_SIZE=3g
 #Enter passwords for the following applications, remember that your security
 #depends on it so please use only strong passwords (dont use "/" in password)
 #example: DATABASE_PASSWORD=Chang3me123!
-DATABASE_PASSWORD=TESTtestt1
 MYSQLCHK_PASS=TESTtestt1
-MYSQL_REPLICATOR_PASS=TESTtestt1
-MYSQL_BACKUP_PASS=TESTtestt1
 KEEPALIVED_PASS=TESTtestt1
 RSYNC_PASS=TESTtestt1
-HAPROXY_PASS=TESTtestt1
 SUPERVISOR_PASS=TESTtestt1
 
 #DO NOT CHANGE ANYTHING AFTER THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
@@ -154,14 +130,12 @@ then
 fi
 
 #CPU_LIMITS
-grep -r "VARNISH_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/VARNISH_CPU_LIMIT/$VARNISH_CPU_LIMIT/g"
 grep -r "RESQUE_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/RESQUE_CPU_LIMIT/$RESQUE_CPU_LIMIT/g"
 grep -r "APACHE_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/APACHE_CPU_LIMIT/$APACHE_CPU_LIMIT/g"
 grep -r "REDIS_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/REDIS_CPU_LIMIT/$REDIS_CPU_LIMIT/g"
 grep -r "ELASTIC_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ELASTIC_CPU_LIMIT/$ELASTIC_CPU_LIMIT/g"
 
 #MEM_LIMITS
-grep -r "VARNISH_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/VARNISH_MEM_LIMIT/$VARNISH_MEM_LIMIT/g"
 grep -r "RESQUE_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/RESQUE_MEM_LIMIT/$RESQUE_MEM_LIMIT/g"
 grep -r "APACHE_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/APACHE_MEM_LIMIT/$APACHE_MEM_LIMIT/g"
 grep -r "REDIS_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/REDIS_MEM_LIMIT/$REDIS_MEM_LIMIT/g"
@@ -170,9 +144,7 @@ grep -r "MIN_HEAP_SIZE" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xa
 grep -r "MAX_HEAP_SIZE" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/MAX_HEAP_SIZE/$MAX_HEAP_SIZE/g"
 
 #OTHER
-grep -r "KEEPALIVED_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/KEEPALIVED_PASS/$KEEPALIVED_PASS/g"
 grep -r "RSYNC_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/RSYNC_PASS/$RSYNC_PASS/g"
-grep -r "HAPROXY_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/HAPROXY_PASS/$HAPROXY_PASS/g"
 grep -r "SUPERVISOR_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/SUPERVISOR_PASS/$SUPERVISOR_PASS/g"
 
 if [ "$VALUE" -eq "1" ] 2>/dev/null; then

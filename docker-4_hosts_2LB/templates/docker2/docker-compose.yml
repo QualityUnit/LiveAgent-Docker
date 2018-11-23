@@ -31,20 +31,6 @@ services:
     depends_on:
       - redis
       - elasticsearch
-  redis:
-    build: ./redis
-    container_name: "redis"
-    restart: unless-stopped
-    volumes:
-      - redisdata:/var/lib/redis
-    ports:
-      - 6379:6379
-    sysctls:
-      - net.core.somaxconn=10000
-    cpus: REDIS_CPU_LIMIT
-    mem_limit: REDIS_MEM_LIMIT
-    ulimits:
-      nofile: 90032
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
     container_name: elasticsearch
