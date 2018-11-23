@@ -54,7 +54,6 @@ ALIAS_NAME=liveagent.local
 NGINX_CPU_LIMIT=4
 VARNISH_CPU_LIMIT=1
 HAPROXY_CPU_LIMIT=2
-ELASTIC_CPU_LIMIT=1
 
 #Enter memory limits for containers, if memory exceeds the limit,
 #the container is restarted because of OOM. It is better this way because
@@ -62,20 +61,18 @@ ELASTIC_CPU_LIMIT=1
 #you could run out of hosts resources and the whole server would go down
 NGINX_MEM_LIMIT=1g
 VARNISH_MEM_LIMIT=2g
-HAPROXY_MEM_LIMIT=500m
-ELASTIC_MEM_LIMIT=6g
+HAPROXY_MEM_LIMIT=2g
 
 #Enter minimal and maximal heap size (mem limit) for Elasticsearch per host,
 #for example MIN_HEAP_SIZE=4g or MIN_HEAP_SIZE=500m.
 #BEST PRACTICE IS HALF OF ELASTIC_MEM_LIMIT
-MIN_HEAP_SIZE=3g
-MAX_HEAP_SIZE=3g
+#MIN_HEAP_SIZE=3g
+#MAX_HEAP_SIZE=3g
 
 #Enter passwords for the following applications, remember that your security
 #depends on it so please use only strong passwords (dont use "/" in password)
 #example: DATABASE_PASSWORD=Chang3me123!
 KEEPALIVED_PASS=TESTtestt1
-RSYNC_PASS=TESTtestt1
 HAPROXY_PASS=TESTtestt1
 
 #DO NOT CHANGE ANYTHING AFTER THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
