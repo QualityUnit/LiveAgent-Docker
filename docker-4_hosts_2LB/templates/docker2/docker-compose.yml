@@ -61,7 +61,5 @@ services:
 volumes:
   app:
     driver: local
-  redisdata:
-    driver: local
   esdata:
     driver: local
