@@ -177,18 +177,20 @@ grep -r "SUPERVISOR_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | 
 
 if [ "$VALUE" -eq "1" ] 2>/dev/null; then
   rm -rf ./production/docker2 ./production/docker3 ./production/docker4 ./production/docker1_LB ./production/docker2_LB
-  ln -s /opt/LiveAgent-Docker/docker-4_hosts/production/docker1 /opt/docker1
-  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-4_hosts/production/docker1/apache-fpm/
+  ln -s /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker1 /opt/docker1
+  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker1/apache-fpm/
 elif [ "$VALUE" -eq "2" ] 2>/dev/null; then
   rm -rf ./production/docker1 ./production/docker3 ./production/docker4 ./production/docker1_LB ./production/docker2_LB
-  ln -s /opt/LiveAgent-Docker/docker-4_hosts/production/docker2 /opt/docker2
-  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-4_hosts/production/docker2/apache-fpm/la_latest.zip
+  ln -s /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker2 /opt/docker2
+  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker2/apache-fpm/la_latest.zip
 elif [ "$VALUE" -eq "3" ] 2>/dev/null; then
   rm -rf ./production/docker1 ./production/docker2 ./production/docker4 ./production/docker1_LB ./production/docker2_LB
-  ln -s /opt/LiveAgent-Docker/docker-4_hosts/production/docker3 /opt/docker3
+  ln -s /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker3 /opt/docker3
+  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker3/apache-fpm/la_latest.zip
 elif [ "$VALUE" -eq "4" ] 2>/dev/null; then
   rm -rf ./production/docker1 ./production/docker2 ./production/docker3 ./production/docker1_LB ./production/docker2_LB
-  ln -s /opt/LiveAgent-Docker/docker-4_hosts/production/docker4 /opt/docker4
+  ln -s /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker4 /opt/docker4
+  cp $LA_LOCATION/la*.zip /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker4/apache-fpm/la_latest.zip
 else
   echo "Please re-run this script and write only numbers from 1 to 4."
   exit 0
