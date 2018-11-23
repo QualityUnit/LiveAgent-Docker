@@ -99,11 +99,6 @@ else
   exit 0
 fi
 
-#LIVEAGENT
-grep -r "ADMIN_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ADMIN_NAME/$ADMIN_NAME/g"
-grep -r "ADMIN_EMAIL" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ADMIN_EMAIL/$ADMIN_EMAIL/g"
-grep -r "ADMIN_PASSWORD" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ADMIN_PASSWORD/$ADMIN_PASSWORD/g"
-grep -r "LICENSE_CODE" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/LICENSE_CODE/$LICENSE_CODE/g"
 
 #NETWORK
 grep -r "PRIVATE_IF_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IF_NAME/$PRIVATE_IF_NAME/g"
@@ -130,15 +125,11 @@ fi
 grep -r "NGINX_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/NGINX_CPU_LIMIT/$NGINX_CPU_LIMIT/g"
 grep -r "VARNISH_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/VARNISH_CPU_LIMIT/$VARNISH_CPU_LIMIT/g"
 grep -r "HAPROXY_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/HAPROXY_CPU_LIMIT/$HAPROXY_CPU_LIMIT/g"
-grep -r "ELASTIC_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ELASTIC_CPU_LIMIT/$ELASTIC_CPU_LIMIT/g"
 
 #MEM_LIMITS
 grep -r "NGINX_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/NGINX_MEM_LIMIT/$NGINX_MEM_LIMIT/g"
 grep -r "VARNISH_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/VARNISH_MEM_LIMIT/$VARNISH_MEM_LIMIT/g"
 grep -r "HAPROXY_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/HAPROXY_MEM_LIMIT/$HAPROXY_MEM_LIMIT/g"
-grep -r "ELASTIC_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ELASTIC_MEM_LIMIT/$ELASTIC_MEM_LIMIT/g"
-grep -r "MIN_HEAP_SIZE" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/MIN_HEAP_SIZE/$MIN_HEAP_SIZE/g"
-grep -r "MAX_HEAP_SIZE" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/MAX_HEAP_SIZE/$MAX_HEAP_SIZE/g"
 
 #OTHER
 grep -r "KEEPALIVED_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/KEEPALIVED_PASS/$KEEPALIVED_PASS/g"
@@ -150,7 +141,7 @@ if [ "$VALUE" -eq "1" ] 2>/dev/null; then
   ln -s /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker1_LB /opt/docker1_LB
 elif [ "$VALUE" -eq "2" ] 2>/dev/null; then
   rm -rf ./production/docker1_LB ./production/docker1 ./production/docker2 ./production/docker3 ./production/docker4
-  ln -s /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker2_2LB /opt/docker2_LB
+  ln -s /opt/LiveAgent-Docker/docker-4_hosts_2LB/production/docker2_LB /opt/docker2_LB
 else
   echo "Please re-run this script and write only number 1 or 2."
   exit 0
