@@ -11,10 +11,10 @@
 #ADMIN_EMAIL=jsmith@gmail.com
 #ADMIN_PASSWORD=Changeme123!
 #LICENSE_CODE=dfs8b996
-ADMIN_NAME=""
-ADMIN_EMAIL=
-ADMIN_PASSWORD=
-LICENSE_CODE=
+ADMIN_NAME="test"
+ADMIN_EMAIL=test@test.com
+ADMIN_PASSWORD=test.com
+LICENSE_CODE=laPro
 
 #Enter public float IP of your liveagent site
 #example: FLOAT_IP=154.18.0.31
@@ -22,24 +22,24 @@ LICENSE_CODE=
 
 #Interface with private IP, for example: PRIVATE_IF_NAME=eth1
 #(needed for iptables rules)
-PRIVATE_IF_NAME=
+PRIVATE_IF_NAME=eth0
 
 #Enter private IP of the FIRST host
-PRIVATE_IP_1=
+PRIVATE_IP_1=173.168.1.31
 
 #Enter private IP of the SECOND host
-PRIVATE_IP_2=
+PRIVATE_IP_2=173.168.1.32
 
 #Enter private IP of the THIRD host
-PRIVATE_IP_3=
+PRIVATE_IP_3=173.168.1.33
 
 #Enter private IP of the FOURTH host
-PRIVATE_IP_4=
+PRIVATE_IP_4=173.168.1.34
 
 #Enter path to location where LiveAgent .zip file is saved
 #Always have only the most current version in this directory, remove old ones!!!
 #For example LA_LOCATION=/tmp
-LA_LOCATION=
+LA_LOCATION=/tmp
 
 #Do you want this script to set up iptables (firewall) for you?
 #You can enter "no" or "yes" (don't leave it empty) and modify iptables.sh in ./conf
@@ -47,24 +47,24 @@ LA_LOCATION=
 #expose ports 80 and 443 for liveagent to work and you to ssh from anywher,
 #everything else is blocked or accessible only by internal/docker network
 #example: IPTABLES_RULES=yes
-IPTABLES_RULES=
+IPTABLES_RULES=yes
 
 #Enter the name of your site and alias
 #For example: SERVER_NAME=ladesk.com and ALIAS_NAME=www.ladesk.com
-SERVER_NAME=
-ALIAS_NAME=
+SERVER_NAME=liveagent.local
+ALIAS_NAME=liveagent.local
 
 #Enter path with quotes to location where Mysql backup files should be saved
 #Do not end it with "/" on the end. For example: BACKUP_PATH="/app/DBbackups"
-BACKUP_PATH=""
+BACKUP_PATH="/opt"
 
 #Enter when the backups should be running (0-23) server time
 #USE ONLY WHOLE NUMBERS, for example: BACKUP_RUN=2 (for 2 AM)
-BACKUP_RUN=
+BACKUP_RUN=2
 
 #Enter how many days should Mysql backup file be saved before removal
 #USE ONLY WHOLE NUMBERS, for example: X_DAYS_OLDER=14 (for 2 weeks)
-X_DAYS_OLDER=
+X_DAYS_OLDER=2
 
 #Specify how much of the available CPU resources a container can use. For
 #instance, if the host machine has 12 CPUs and you set MYSQL_CPU_LIMIT=2,
@@ -100,14 +100,14 @@ MAX_HEAP_SIZE=3g
 #Enter passwords for the following applications, remember that your security
 #depends on it so please use only strong passwords (dont use "/" in password)
 #example: DATABASE_PASSWORD=Chang3me123!
-DATABASE_PASSWORD=
-MYSQLCHK_PASS=
-MYSQL_REPLICATOR_PASS=
-MYSQL_BACKUP_PASS=
-KEEPALIVED_PASS=
-RSYNC_PASS=
-HAPROXY_PASS=
-SUPERVISOR_PASS=
+DATABASE_PASSWORD=TESTtestt1
+MYSQLCHK_PASS=TESTtestt1
+MYSQL_REPLICATOR_PASS=TESTtestt1
+MYSQL_BACKUP_PASS=TESTtestt1
+KEEPALIVED_PASS=TESTtestt1
+RSYNC_PASS=TESTtestt1
+HAPROXY_PASS=TESTtestt1
+SUPERVISOR_PASS=TESTtestt1
 
 #DO NOT CHANGE ANYTHING AFTER THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
 ###############################################################################

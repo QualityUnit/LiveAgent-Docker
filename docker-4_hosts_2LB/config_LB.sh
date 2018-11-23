@@ -10,17 +10,29 @@
 #ADMIN_NAME="John Smith"
 #ADMIN_EMAIL=jsmith@gmail.com
 #ADMIN_PASSWORD=Changeme123!
-ADMIN_NAME=""
-ADMIN_EMAIL=
-ADMIN_PASSWORD=
+ADMIN_NAME="test"
+ADMIN_EMAIL=test@test.com
+ADMIN_PASSWORD=test.com
 
 #Enter public float IP of your liveagent site
 #example: FLOAT_IP=154.18.0.31
-FLOAT_IP=
+FLOAT_IP=173.168.1.135
+
+#Enter private IP of the FIRST host
+PRIVATE_IP_1=173.168.1.31
+
+#Enter private IP of the SECOND host
+PRIVATE_IP_2=173.168.1.32
+
+#Enter private IP of the THIRD host
+PRIVATE_IP_3=173.168.1.33
+
+#Enter private IP of the FOURTH host
+PRIVATE_IP_4=173.168.1.34
 
 #Interface with private IP, for example: PRIVATE_IF_NAME=eth1
 #(needed for iptables rules)
-PRIVATE_IF_NAME=
+PRIVATE_IF_NAME=eth0
 
 #Do you want this script to set up iptables (firewall) for you?
 #You can enter "no" or "yes" (don't leave it empty) and modify iptables.sh in ./conf
@@ -28,12 +40,12 @@ PRIVATE_IF_NAME=
 #expose ports 80 and 443 for liveagent to work and you to ssh from anywher,
 #everything else is blocked or accessible only by internal/docker network
 #example: IPTABLES_RULES=yes
-IPTABLES_RULES=
+IPTABLES_RULES=yes
 
 #Enter the name of your site and alias
 #For example: SERVER_NAME=ladesk.com and ALIAS_NAME=www.ladesk.com
-SERVER_NAME=
-ALIAS_NAME=
+SERVER_NAME=liveagent.local
+ALIAS_NAME=liveagent.local
 
 
 #Specify how much of the available CPU resources a container can use. For
@@ -62,9 +74,9 @@ MAX_HEAP_SIZE=3g
 #Enter passwords for the following applications, remember that your security
 #depends on it so please use only strong passwords (dont use "/" in password)
 #example: DATABASE_PASSWORD=Chang3me123!
-KEEPALIVED_PASS=
-RSYNC_PASS=
-HAPROXY_PASS=
+KEEPALIVED_PASS=TESTtestt1
+RSYNC_PASS=TESTtestt1
+HAPROXY_PASS=TESTtestt1
 
 #DO NOT CHANGE ANYTHING AFTER THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
 ###############################################################################
@@ -96,6 +108,10 @@ grep -r "LICENSE_CODE" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xar
 #NETWORK
 grep -r "PRIVATE_IF_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IF_NAME/$PRIVATE_IF_NAME/g"
 grep -r "FLOAT_IP" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/FLOAT_IP/$FLOAT_IP/g"
+grep -r "PRIVATE_IP_1" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_1/$PRIVATE_IP_1/g"
+grep -r "PRIVATE_IP_2" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_2/$PRIVATE_IP_2/g"
+grep -r "PRIVATE_IP_3" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_3/$PRIVATE_IP_3/g"
+grep -r "PRIVATE_IP_4" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/PRIVATE_IP_4/$PRIVATE_IP_4/g"
 grep -r "SERVER_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/SERVER_NAME/$SERVER_NAME/g"
 grep -r "ALIAS_NAME" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ALIAS_NAME/$ALIAS_NAME/g"
 
