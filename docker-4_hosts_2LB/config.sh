@@ -18,7 +18,7 @@ LICENSE_CODE=laPro
 
 #Enter public float IP of your liveagent site
 #example: FLOAT_IP=154.18.0.31
-#FLOAT_IP=
+FLOAT_IP=173.168.1.135
 
 #Interface with private IP, for example: PRIVATE_IF_NAME=eth1
 #(needed for iptables rules)
@@ -117,15 +117,11 @@ read VALUE
 rm -rf `find ../docker* -type d | grep -v 'docker-4_hosts_2LB'` 2>/dev/null
 mkdir -p ./production; mkdir -p ./backup
 
-SSL_CRT=./ssl.crt
-SSL_KEY=./ssl.key
-if [ -f $SSL_CRT ] && [ -f $SSL_KEY ] && [ -f $LA_LOCATION/la*.zip ]; then
+if [ -f $LA_LOCATION/la*.zip ]; then
   tar -zcf ./backup/docker_backup."$(date +%Y%m%d)".tar.gz ./production/* 2>/dev/null && rm -rf ./production/*
   cp -r ./templates/* ./production/
-  echo ./production/docker*/nginx/ | xargs -n 1 cp ./ssl.key
-  echo ./production/docker*/nginx/ | xargs -n 1 cp ./ssl.crt
 else
-  echo "Please add ssl.key and ssl.crt files to this directory and LA .zip file to directory you entered to continue..."
+  echo "Please add LA .zip file to directory you entered to continue..."
   pwd
   exit 0
 fi
@@ -157,20 +153,10 @@ then
   grep -r "iptables" ./production/docker*/install_utils.sh -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "/iptables/d"
 fi
 
-#MYSQL
-grep -r "DATABASE_PASSWORD" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/DATABASE_PASSWORD/$DATABASE_PASSWORD/g"
-grep -r "MYSQLCHK_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/MYSQLCHK_PASS/$MYSQLCHK_PASS/g"
-grep -r "MYSQL_REPLICATOR_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/MYSQL_REPLICATOR_PASS/$MYSQL_REPLICATOR_PASS/g"
-grep -r "MYSQL_BACKUP_PASS" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/MYSQL_BACKUP_PASS/$MYSQL_BACKUP_PASS/g"
-grep -r "BACKUP_PATH" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s|BACKUP_PATH|$BACKUP_PATH|g"
-grep -r "BACKUP_RUN" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/BACKUP_RUN/$BACKUP_RUN/g"
-grep -r "X_DAYS_OLDER" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/X_DAYS_OLDER/$X_DAYS_OLDER/g"
-
 #CPU_LIMITS
 grep -r "VARNISH_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/VARNISH_CPU_LIMIT/$VARNISH_CPU_LIMIT/g"
 grep -r "RESQUE_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/RESQUE_CPU_LIMIT/$RESQUE_CPU_LIMIT/g"
 grep -r "APACHE_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/APACHE_CPU_LIMIT/$APACHE_CPU_LIMIT/g"
-grep -r "MYSQL_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/MYSQL_CPU_LIMIT/$MYSQL_CPU_LIMIT/g"
 grep -r "REDIS_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/REDIS_CPU_LIMIT/$REDIS_CPU_LIMIT/g"
 grep -r "ELASTIC_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ELASTIC_CPU_LIMIT/$ELASTIC_CPU_LIMIT/g"
 
@@ -178,7 +164,6 @@ grep -r "ELASTIC_CPU_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' 
 grep -r "VARNISH_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/VARNISH_MEM_LIMIT/$VARNISH_MEM_LIMIT/g"
 grep -r "RESQUE_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/RESQUE_MEM_LIMIT/$RESQUE_MEM_LIMIT/g"
 grep -r "APACHE_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/APACHE_MEM_LIMIT/$APACHE_MEM_LIMIT/g"
-grep -r "MYSQL_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/MYSQL_MEM_LIMIT/$MYSQL_MEM_LIMIT/g"
 grep -r "REDIS_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/REDIS_MEM_LIMIT/$REDIS_MEM_LIMIT/g"
 grep -r "ELASTIC_MEM_LIMIT" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/ELASTIC_MEM_LIMIT/$ELASTIC_MEM_LIMIT/g"
 grep -r "MIN_HEAP_SIZE" ./production/* -l | grep -v config.sh | tr '\n' ' ' | xargs sed -i "s/MIN_HEAP_SIZE/$MIN_HEAP_SIZE/g"
