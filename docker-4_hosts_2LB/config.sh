@@ -80,6 +80,7 @@ MAX_HEAP_SIZE=3g
 #Enter passwords for the following applications, remember that your security
 #depends on it so please use only strong passwords (dont use "/" in password)
 #example: DATABASE_PASSWORD=Chang3me123!
+DATBASE_PASSWORD=DB_PASS  --- dorobit sed
 MYSQLCHK_PASS=TESTtestt1
 KEEPALIVED_PASS=TESTtestt1
 RSYNC_PASS=TESTtestt1

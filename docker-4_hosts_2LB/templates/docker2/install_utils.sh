@@ -73,7 +73,7 @@ chmod +x /usr/local/bin/docker-compose
 
 cp ./conf/rsync /etc/xinetd.d/rsync && rm -rf ./conf/rsync
 chmod +x /etc/xinetd.d/rsync
-\cp ./conf/rsyncd.conf /etc/rsyncd.conf && rm -rf ./conf/rsyncd.conf
+cp ./conf/rsyncd.conf /etc/rsyncd.conf && rm -rf ./conf/rsyncd.conf
 chmod 644 /etc/rsyncd.conf
 chmod 600 ./conf/rsyncd.secrets
 chmod 600 ./conf/rsync_pass
