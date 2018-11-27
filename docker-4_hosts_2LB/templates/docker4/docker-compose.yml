@@ -29,7 +29,6 @@ services:
       nproc: 30240
       nofile: 65536
     depends_on:
-      - redis
       - elasticsearch
   sentinel:
     build: ./redis-sentinel
@@ -37,8 +36,6 @@ services:
     restart: unless-stopped
     ports:
       - 26379:26379
-    depends_on:
-      - redis
     sysctls:
       - net.core.somaxconn=512
   elasticsearch:

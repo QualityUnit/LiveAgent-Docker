@@ -29,7 +29,6 @@ services:
       nproc: 30240
       nofile: 65536
     depends_on:
-      - redis
       - elasticsearch
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
