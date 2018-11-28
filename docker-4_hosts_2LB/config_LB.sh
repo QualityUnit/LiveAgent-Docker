@@ -12,7 +12,7 @@
 #ADMIN_PASSWORD=Changeme123!
 ADMIN_NAME="test"
 ADMIN_EMAIL=test@test.com
-ADMIN_PASSWORD=test.com
+ADMIN_PASSWORD=test
 
 #Enter public float IP of your liveagent site
 #example: FLOAT_IP=154.18.0.31

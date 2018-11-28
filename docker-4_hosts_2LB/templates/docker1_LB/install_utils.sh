@@ -40,7 +40,8 @@ chmod +x /usr/local/bin/docker-compose
 
 yum install -y keepalived-1.3.5
 \cp ./conf/keep* /etc/keepalived/keepalived.conf && rm -rf ./conf/keep*
-systemctl start keepalived.service && systemctl enable keepalived.service
+###### keepalived will need manual config , enable and start will be commented
+#systemctl start keepalived.service && systemctl enable keepalived.service
 
 #INSTALL XINETD
 
