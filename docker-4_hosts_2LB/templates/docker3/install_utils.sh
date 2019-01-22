@@ -20,7 +20,8 @@ if [[ $(grep GEOIP /etc/crontab) == "" ]]; then
   echo "44 2 * * 6 root /usr/bin/geoipupdate -d /etc/geoip/ > /dev/null" >> /etc/crontab
   echo "" >> /etc/crontab
 fi
-wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz -P /etc/geoip/ && gunzip -f /etc/geoip/GeoLiteCity.dat.gz
+wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz -P /etc/geoip/ && tar zxvf /etc/geoip/GeoLite2-City.tar.gz -C /etc/geoip && rm -f /etc/geoip/GeoLite2-City.tar.gz
+find /etc/geoip/ -maxdepth 2 -type f -name 'GeoLite2-City.mmdb' -type f -exec mv {} /etc/geoip/ \;
 /usr/bin/geoipupdate -d /etc/geoip/ > /dev/null
 
 #CLAMAV
