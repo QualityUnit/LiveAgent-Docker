@@ -8,8 +8,7 @@ RUN yum clean all && \
     yum -y install httpd php-fpm php-pecl-redis php-pecl-yaml php-cli php-xml php-pdo php-mysqlnd php-gd php-opcache php-bcmath php-mbstring php-soap php-ldap php-process iproute unzip && \
     yum clean all
 
-RUN mkdir -p /var/www/health_check/ && \
-    mkdir -p /var/www/socket/ && \
+RUN mkdir -p /var/www/socket/ && \
     mkdir -p /etc/httpd/sites.d/ && \
     mkdir -p /etc/httpd/conf/ && \
     mkdir -p /var/run/php-fpm/ && \

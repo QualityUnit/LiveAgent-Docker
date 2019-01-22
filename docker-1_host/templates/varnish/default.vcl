@@ -107,6 +107,7 @@ sub vcl_backend_response {
 
     if (beresp.http.content-type ~ "(text|javascript|svg)") {
       set beresp.do_gzip = true;
+      set beresp.do_stream = false
     }
 
     if (beresp.ttl > 14400s) {

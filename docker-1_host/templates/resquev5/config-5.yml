@@ -1,7 +1,7 @@
 log:
     level: notice
-    path: "/var/log/resque-serial-4.log"
-    application_name: "resque-v4"
+    path: "/var/log/resque-serial-5.log"
+    application_name: "resque-v5"
     system_name: ""
     extra_prefix: ""
     context_prefix: "ctxt_"
