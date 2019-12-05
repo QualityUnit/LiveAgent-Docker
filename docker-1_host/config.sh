@@ -11,14 +11,14 @@
 #ADMIN_EMAIL=jsmith@gmail.com
 #ADMIN_PASSWORD=Changeme123!
 #LICENSE_CODE=dfs8b996
-ADMIN_NAME=""
-ADMIN_EMAIL=
-ADMIN_PASSWORD=
-LICENSE_CODE=
+ADMIN_NAME="test"
+ADMIN_EMAIL=test@test.com
+ADMIN_PASSWORD=test
+LICENSE_CODE=laPro
 
 #Enter public IP of your liveagent site
 #example: CUSTOMER_IP=154.18.0.31
-CUSTOMER_IP=
+CUSTOMER_IP=173.168.1.31
 
 #Do you want this script to set up iptables (firewall) for you?
 #You can enter "no" or "yes" (don't leave it empty) and modify iptables.sh in ./conf
@@ -26,21 +26,21 @@ CUSTOMER_IP=
 #expose ports 80 and 443 for liveagent to work and you to ssh from anywher,
 #everything else is blocked or accessible only by internal/docker network
 #example: IPTABLES_RULES=yes
-IPTABLES_RULES=
+IPTABLES_RULES=yes
 
 #Interface with private IP, for example: PRIVATE_IF_NAME=eth1
 #(needed for iptables rules)
-PRIVATE_IF_NAME=
+PRIVATE_IF_NAME=eth1
 
 #Enter path to location where LiveAgent .zip file is saved
 #Always have only the most current version in this directory, remove old ones!!!
 #For example LA_LOCATION=/tmp
-LA_LOCATION=
+LA_LOCATION=/vagrant
 
 #Enter the name of your site and alias
 #For example: SERVER_NAME=ladesk.com and ALIAS_NAME=www.ladesk.com
-SERVER_NAME=
-ALIAS_NAME=
+SERVER_NAME=liveagent.lc
+ALIAS_NAME=www.liveagent.lc
 
 #Specify how much of the available CPU resources a container can use. For
 #instance, if the host machine has 12 CPUs and you set MYSQL_CPU_LIMIT=2,
@@ -48,8 +48,8 @@ ALIAS_NAME=
 NGINX_CPU_LIMIT=1
 VARNISH_CPU_LIMIT=1
 RESQUE_CPU_LIMIT=1
-APACHE_CPU_LIMIT=3
-MYSQL_CPU_LIMIT=2
+APACHE_CPU_LIMIT=1
+MYSQL_CPU_LIMIT=1
 REDIS_CPU_LIMIT=1
 ELASTIC_CPU_LIMIT=1
 
@@ -58,12 +58,12 @@ ELASTIC_CPU_LIMIT=1
 #all other containers keep running, if there were no container limits,
 #you could run out of hosts resources and the whole server would go down
 NGINX_MEM_LIMIT=1g
-VARNISH_MEM_LIMIT=2g
-RESQUE_MEM_LIMIT=3g
-APACHE_MEM_LIMIT=6g
-MYSQL_MEM_LIMIT=8g
-REDIS_MEM_LIMIT=2g
-ELASTIC_MEM_LIMIT=6g
+VARNISH_MEM_LIMIT=1g
+RESQUE_MEM_LIMIT=1g
+APACHE_MEM_LIMIT=1g
+MYSQL_MEM_LIMIT=1g
+REDIS_MEM_LIMIT=1g
+ELASTIC_MEM_LIMIT=1g
 
 #Enter minimal and maximal heap size (mem limit) for Elasticsearch per host,
 #for example MIN_HEAP_SIZE=4g or MIN_HEAP_SIZE=500m.
@@ -74,8 +74,8 @@ MAX_HEAP_SIZE=3g
 #Enter passwords for the following applications, remember that your security
 #depends on it so please use only strong passwords (dont use "/" in password)
 #example: DATABASE_PASSWORD=Chang3me123!
-DATABASE_PASSWORD=
-SUPERVISOR_PASS=
+DATABASE_PASSWORD=test
+SUPERVISOR_PASS=test
 
 #DO NOT CHANGE ANYTHING AFTER THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
 ###############################################################################
