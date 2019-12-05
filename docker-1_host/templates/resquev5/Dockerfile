@@ -25,6 +25,3 @@ RUN cd /opt/qu && unzip /opt/qu/resqu-server-5.2.1.zip && \
     cd /opt/qu/php-resque-5 && php composer.phar install --no-dev --no-plugins --no-scripts
 
 CMD ["/usr/bin/php", "-c", "/etc/resque-serial/php.ini" , "/opt/qu/php-resque-5/scripts/startManagers.php" , "/etc/resque-serial/config-5.yml"]
-
-
-ExecStart=/usr/bin/php -c /etc/resque-serial/php.ini /opt/qu/php-resque-5/scripts/startManagers.php /etc/resque-serial/config-5.yml
