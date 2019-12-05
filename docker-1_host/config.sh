@@ -14,7 +14,7 @@
 ADMIN_NAME="test"
 ADMIN_EMAIL=test@test.com
 ADMIN_PASSWORD=test
-LICENSE_CODE=laPro
+LICENSE_CODE=
 
 #Enter public IP of your liveagent site
 #example: CUSTOMER_IP=154.18.0.31
