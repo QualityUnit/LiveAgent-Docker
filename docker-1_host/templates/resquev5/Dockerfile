@@ -1,12 +1,11 @@
 FROM centos:7
 
-COPY remi-php70.repo /etc/yum.repos.d/remi-php70.repo
+COPY remi-php71.repo /etc/yum.repos.d/remi-php71.repo
 
 RUN yum clean all && \
-    yum-config-manager --enable remi-php70 && \
-    yum install -y http://rpms.famillecollet.com/enterprise/7/remi/x86_64/libwebp7-1.0.2-1.el7.remi.x86_64.rpm && \
-    yum install -y http://rpms.famillecollet.com/enterprise/7/remi/x86_64/gd-last-2.2.5-8.el7.remi.x86_64.rpm && \
-    yum -y install python-setuptools php php-gd php-mbstring php-bcmath php-xml php-pdo php-soap php-mysqlnd php-opcache php-ldap php-pecl-redis php-pecl-yaml php-process php-cli git unzip iproute && \
+    yum-config-manager --enable remi-php71-repo && \
+    yum-config-manager --enable remi-repo && \
+    yum -y install python-setuptools php libwebp7 gd-last php-gd php-mbstring php-bcmath php-xml php-pdo php-soap php-mysqlnd php-opcache php-ldap php-pecl-redis php-pecl-yaml php-process php-cli git unzip iproute && \
     easy_install supervisor && \
     yum clean all
 
