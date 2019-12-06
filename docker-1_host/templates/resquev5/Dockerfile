@@ -14,7 +14,6 @@ RUN mkdir -p /etc/resque-serial && \
 
 COPY php.ini /etc/resque-serial/php.ini
 COPY config-5.yml /etc/resque-serial/config-5.yml
-COPY resque-5.conf /etc/supervisor.d/resque-5.conf
 COPY resqu-server-5.2.1.zip /opt/qu/resqu-server-5.2.1.zip
 
 RUN cd /opt/qu && unzip /opt/qu/resqu-server-5.2.1.zip && \
