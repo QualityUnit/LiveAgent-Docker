@@ -1,9 +1,9 @@
 FROM centos:7
 
-COPY nginx-redis-pushstream-1.13.8-1.el7.rpm /var/nginx-redis-pushstream-1.13.8-1.el7.rpm
+COPY nginx-lua-redis-pushstream-1.15.8-1.el7.rpm /var/nginx-lua-redis-pushstream-1.15.8-1.el7.rpm
 
 RUN yum clean all && \
-    yum -y localinstall /var/nginx-redis-pushstream-1.13.8-1.el7.rpm && \
+    yum -y localinstall /var/nginx-lua-redis-pushstream-1.15.8-1.el7.rpm && \
     yum install -y iproute && \
     yum clean all
 
@@ -16,6 +16,8 @@ RUN rm -rf /etc/nginx/conf.d/* && \
 
 COPY conf.d/* /etc/nginx/conf.d/
 COPY liveagent.conf /etc/nginx/sites.d/
+COPY pushstream_subscriber.conf /etc/nginx/sites.d/
+COPY pushstream.conf /etc/nginx/sites.d/
 COPY ssl.crt /etc/nginx/ssl/ssl.crt
 COPY ssl.key /etc/nginx/ssl/ssl.key
 
