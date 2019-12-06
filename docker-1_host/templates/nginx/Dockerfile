@@ -17,7 +17,6 @@ RUN rm -rf /etc/nginx/conf.d/* && \
 COPY conf.d/* /etc/nginx/conf.d/
 COPY liveagent.conf /etc/nginx/sites.d/
 COPY pushstream_subscriber.conf /etc/nginx/sites.d/
-COPY pushstream.conf /etc/nginx/sites.d/
 COPY ssl.crt /etc/nginx/ssl/ssl.crt
 COPY ssl.key /etc/nginx/ssl/ssl.key
 
