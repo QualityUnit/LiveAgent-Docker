@@ -20,7 +20,6 @@ LICENSE_CODE=
 #example: CUSTOMER_IP=154.18.0.31
 CUSTOMER_IP=173.168.1.31
 
-
 #Do you want this script to set up iptables (firewall) for you?
 #You can enter "no" or "yes" (don't leave it empty) and modify iptables.sh in ./conf
 #directory before running this script, deafult IPtables rules are to only
