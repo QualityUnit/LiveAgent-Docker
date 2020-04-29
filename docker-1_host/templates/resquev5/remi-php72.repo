@@ -1,7 +1,7 @@
-[remi-php71-repo]
-name=Remi PHP 7.1 Repository
+[remi-php72-repo]
+name=Remi PHP 7.2 Repository
 enabled=1
-baseurl=http://rpms.famillecollet.com/enterprise/7/php71/x86_64/
+baseurl=http://rpms.famillecollet.com/enterprise/7/php72/x86_64/
 gpgcheck=0
 
 [remi-repo]
