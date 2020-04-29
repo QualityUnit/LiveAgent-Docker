@@ -26,7 +26,7 @@ CUSTOMER_IP=172.17.1.51
 #expose ports 80 and 443 for liveagent to work and you to ssh from anywher,
 #everything else is blocked or accessible only by internal/docker network
 #example: IPTABLES_RULES=yes
-IPTABLES_RULES=yes
+IPTABLES_RULES=no
 
 #Interface with private IP, for example: PRIVATE_IF_NAME=eth1
 #(needed for iptables rules)
@@ -45,7 +45,7 @@ ALIAS_NAME=www.liveagent.lc
 #Specify how much of the available CPU resources a container can use. For
 #instance, if the host machine has 12 CPUs and you set MYSQL_CPU_LIMIT=2,
 #the container is guaranteed at most 2 of the CPUs.
-NGINX_CPU_LIMIT=.25
+NGINX_CPU_LIMIT=1
 VARNISH_CPU_LIMIT=.25
 RESQUE_CPU_LIMIT=.25
 APACHE_CPU_LIMIT=.25
@@ -68,7 +68,7 @@ ELASTIC_MEM_LIMIT=1g
 #Enter minimal and maximal heap size (mem limit) for Elasticsearch per host,
 #for example MIN_HEAP_SIZE=4g or MIN_HEAP_SIZE=500m.
 #BEST PRACTICE IS HALF OF ELASTIC_MEM_LIMIT
-MIN_HEAP_SIZE=256m
+MIN_HEAP_SIZE=512m
 MAX_HEAP_SIZE=512m
 
 #Enter passwords for the following applications, remember that your security

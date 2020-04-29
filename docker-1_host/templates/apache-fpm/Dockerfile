@@ -5,6 +5,7 @@ COPY remi-php72.repo /etc/yum.repos.d/remi-php72.repo
 RUN yum clean all && \
     yum-config-manager --enable remi-php72-repo && \
     yum-config-manager --enable remi-repo && \
+    yum -y install epel-release && \
     yum -y install httpd php-fpm libwebp7 gd-last php-pecl-redis php-pecl-yaml php-cli php-xml php-pdo php-mysqlnd php-gd php-opcache php-bcmath php-mbstring php-soap php-ldap php-process iproute unzip && \
     yum clean all
 

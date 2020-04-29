@@ -38,7 +38,6 @@ if [ -f $FILE ]; then
    echo ""
    echo ""
    docker exec -i apache-fpm /install.sh | grep -v 42S02
-   curl -k https://SERVER_NAME/index.php?action=rewrite_ok
    rm -f ./apache-fpm/la*
    mv $FILE ./apache-fpm
    echo -ne '\n'
