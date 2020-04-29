@@ -35,7 +35,7 @@ PRIVATE_IF_NAME=eth1
 #Enter path to location where LiveAgent .zip file is saved
 #Always have only the most current version in this directory, remove old ones!!!
 #For example LA_LOCATION=/tmp
-LA_LOCATION=/vagrant
+LA_LOCATION=/tmp
 
 #Enter the name of your site and alias
 #For example: SERVER_NAME=ladesk.com and ALIAS_NAME=www.ladesk.com
