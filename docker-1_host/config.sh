@@ -14,7 +14,7 @@
 ADMIN_NAME="test"
 ADMIN_EMAIL=test@test.com
 ADMIN_PASSWORD=test
-LICENSE_CODE=
+LICENSE_CODE=laPro
 
 #Enter public IP of your liveagent site
 #example: CUSTOMER_IP=154.18.0.31
@@ -45,31 +45,31 @@ ALIAS_NAME=www.liveagent.lc
 #Specify how much of the available CPU resources a container can use. For
 #instance, if the host machine has 12 CPUs and you set MYSQL_CPU_LIMIT=2,
 #the container is guaranteed at most 2 of the CPUs.
-NGINX_CPU_LIMIT=1
-VARNISH_CPU_LIMIT=1
-RESQUE_CPU_LIMIT=1
-APACHE_CPU_LIMIT=1
-MYSQL_CPU_LIMIT=1
-REDIS_CPU_LIMIT=1
+NGINX_CPU_LIMIT=.25
+VARNISH_CPU_LIMIT=.25
+RESQUE_CPU_LIMIT=.25
+APACHE_CPU_LIMIT=.25
+MYSQL_CPU_LIMIT=.25
+REDIS_CPU_LIMIT=.25
 ELASTIC_CPU_LIMIT=1
 
 #Enter memory limits for containers, if memory exceeds the limit,
 #the container is restarted because of OOM. It is better this way because
 #all other containers keep running, if there were no container limits,
 #you could run out of hosts resources and the whole server would go down
-NGINX_MEM_LIMIT=1g
-VARNISH_MEM_LIMIT=1g
-RESQUE_MEM_LIMIT=1g
-APACHE_MEM_LIMIT=1g
+NGINX_MEM_LIMIT=300m
+VARNISH_MEM_LIMIT=500m
+RESQUE_MEM_LIMIT=500m
+APACHE_MEM_LIMIT=300m
 MYSQL_MEM_LIMIT=1g
-REDIS_MEM_LIMIT=1g
+REDIS_MEM_LIMIT=300m
 ELASTIC_MEM_LIMIT=1g
 
 #Enter minimal and maximal heap size (mem limit) for Elasticsearch per host,
 #for example MIN_HEAP_SIZE=4g or MIN_HEAP_SIZE=500m.
 #BEST PRACTICE IS HALF OF ELASTIC_MEM_LIMIT
-MIN_HEAP_SIZE=3g
-MAX_HEAP_SIZE=3g
+MIN_HEAP_SIZE=256m
+MAX_HEAP_SIZE=512m
 
 #Enter passwords for the following applications, remember that your security
 #depends on it so please use only strong passwords (dont use "/" in password)
