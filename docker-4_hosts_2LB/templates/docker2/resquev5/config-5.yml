@@ -22,19 +22,19 @@ allocators:
 pools:
     static:
         emails_out:
-            worker_count: 2
+            worker_count: 4
         conversation_indexing:
-            worker_count: 2
+            worker_count: 6
         default_job_pool:
-            worker_count: 2
+            worker_count: 6
 
     batch:
         conversations_reindex:
             unit_count: 1
-            workers_per_unit: 4
+            workers_per_unit: 6
         default_batch_pool:
             unit_count: 1
-            workers_per_unit: 4
+            workers_per_unit: 6
 
 
 mapping:
