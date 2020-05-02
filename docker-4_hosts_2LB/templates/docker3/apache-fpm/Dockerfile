@@ -1,11 +1,12 @@
 FROM centos:7
 
-COPY remi-php70.repo /etc/yum.repos.d/remi-php70.repo
+COPY remi-php72.repo /etc/yum.repos.d/remi-php72.repo
 
 RUN yum clean all && \
-    yum-config-manager --enable remi-php70 && \
-    yum install -y http://rpms.famillecollet.com/enterprise/7/remi/x86_64//gd-last-2.2.5-5.el7.remi.x86_64.rpm && \
-    yum -y install httpd php-fpm php-pecl-redis php-pecl-yaml php-cli php-xml php-pdo php-mysqlnd php-gd php-opcache php-bcmath php-mbstring php-soap php-ldap php-process iproute unzip && \
+    yum-config-manager --enable remi-php72-repo && \
+    yum-config-manager --enable remi-repo && \
+    yum -y install epel-release && \
+    yum -y install httpd php-fpm libwebp7 gd-last php-pecl-redis php-pecl-yaml php-cli php-xml php-pdo php-mysqlnd php-gd php-opcache php-bcmath php-mbstring php-soap php-ldap php-process iproute unzip && \
     yum clean all
 
 RUN mkdir -p /var/www/health_check/ && \
@@ -32,10 +33,6 @@ COPY liveagent.conf /etc/httpd/sites.d/liveagent.conf
 COPY settings.php /var/www/liveagent/accounts/settings.php
 RUN chmod -R 777 /var/www/liveagent/accounts && \
     chown -R apache:apache /var/www/liveagent/accounts
-
-#LA INSTALL/UPDATE
-COPY install.sh /install.sh
-RUN chmod +x /install.sh
 
 #GEOIP
 RUN ln -s /opt/geoip/GeoLiteCity.dat /var/www/liveagent/plugins/GeoIp/GeoLiteCity.dat
