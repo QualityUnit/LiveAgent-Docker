@@ -19,14 +19,13 @@ services:
     depends_on:
       - elasticsearch
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.3
     container_name: elasticsearch
     restart: unless-stopped
     environment:
       - "ES_JAVA_OPTS=-XmsMIN_HEAP_SIZE -XmxMAX_HEAP_SIZE"
       - xpack.security.enabled=false
       - xpack.watcher.enabled=false
-      - xpack.monitoring.enabled=false
       - bootstrap.memory_lock=true
     volumes:
       - esdata:/usr/share/elasticsearch/data

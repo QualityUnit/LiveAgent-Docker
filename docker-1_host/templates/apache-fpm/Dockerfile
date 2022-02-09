@@ -1,12 +1,12 @@
 FROM centos:7
 
-COPY remi-php72.repo /etc/yum.repos.d/remi-php72.repo
+COPY remi-php74.repo /etc/yum.repos.d/remi-php74.repo
 
 RUN yum clean all && \
-    yum-config-manager --enable remi-php72-repo && \
+    yum-config-manager --enable remi-php74-repo && \
     yum-config-manager --enable remi-repo && \
     yum -y install epel-release && \
-    yum -y install httpd php-fpm libwebp7 gd-last php-pecl-redis php-pecl-yaml php-cli php-xml php-pdo php-mysqlnd php-gd php-opcache php-bcmath php-mbstring php-soap php-ldap php-process iproute unzip && \
+    yum -y install httpd php-fpm libwebp7 gd-last php-pecl-redis5 php-pecl-yaml php-cli php-xml php-pdo php-mysqlnd php-gd php-opcache php-bcmath php-mbstring php-soap php-ldap php-process iproute unzip && \
     yum clean all
 
 RUN mkdir -p /var/www/socket/ && \

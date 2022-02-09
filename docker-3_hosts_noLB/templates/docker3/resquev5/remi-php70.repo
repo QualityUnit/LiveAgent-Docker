@@ -1,8 +1,0 @@
-[remi-php70]
-name=Remi's PHP 7.0 RPM repository for Enterprise Linux $releasever - $basearch
-#baseurl=http://rpms.remirepo.net/enterprise/$releasever/php70/$basearch/
-mirrorlist=http://cdn.remirepo.net/enterprise/$releasever/php70/mirror
-# WARNING: Only available for RHEL/CentOS >= 6
-enabled=0
-gpgcheck=1
-gpgkey=http://rpms.remirepo.net/RPM-GPG-KEY-remi
