@@ -1,9 +1,9 @@
 FROM centos:7
 
-COPY nginx-lua-redis-pushstream-1.15.8-1.el7.rpm /var/nginx-lua-redis-pushstream-1.15.8-1.el7.rpm
+COPY nginx-lua-redis-pushstream-1.20.2-1.el7.rpm /var/nginx-lua-redis-pushstream-1.20.2-1.el7.rpm
 
 RUN yum clean all && \
-    yum -y localinstall /var/nginx-lua-redis-pushstream-1.15.8-1.el7.rpm && \
+    yum -y localinstall /var/nginx-lua-redis-pushstream-1.20.2-1.el7.rpm && \
     yum install -y iproute && \
     yum clean all
 
