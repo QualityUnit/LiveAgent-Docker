@@ -51,11 +51,9 @@ innodb_thread_concurrency=24
 innodb_file_per_table
 innodb_write_io_threads=24
 innodb_read_io_threads=24
-innodb_sched_priority_cleaner=39
 innodb_adaptive_flushing=1
 innodb_purge_threads=5
 #transaction-isolation=READ-COMMITTED
-innodb_adaptive_hash_index_partitions=64
 innodb_flush_neighbors=0
 innodb_flush_method=O_DIRECT
 innodb_io_capacity=10000
