@@ -26,7 +26,7 @@ CUSTOMER_IP=172.17.1.51
 #expose ports 80 and 443 for liveagent to work and you to ssh from anywher,
 #everything else is blocked or accessible only by internal/docker network
 #example: IPTABLES_RULES=yes
-IPTABLES_RULES=no
+IPTABLES_RULES=yes
 
 #Interface with private IP, for example: PRIVATE_IF_NAME=eth1
 #(needed for iptables rules)
