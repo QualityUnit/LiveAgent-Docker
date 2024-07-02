@@ -3,13 +3,13 @@ LiveAgent docker infra setup for 4 servers with LB on first and second, mysql on
 PREREQUISITES:
 
 * 4 physical/virtual hosts with enough RAM, CPU and disk space
-* CENTOS 7 with SUDO privileges on all hosts
+* Debian 11 with SUDO privileges on all hosts
 * compatible LA version .zip file stored on all hosts
 
 BUILD INFO
 
     DO EVERY STEP ON ALL HOSTS UNLESS TOLD OTHERWISE
-1.  Install GIT (yum install git) and run "cd /opt && git clone https://github.com/QualityUnit/LiveAgent-Docker.git"
+1.  Install GIT and run "cd /opt && git clone https://github.com/QualityUnit/LiveAgent-Docker.git"
 2.  Enter version of docker setup you would like to install (1_host, 3_hosts...) and create valid ssl.crt and ssl.key files
 3.  Modify config.sh file and enter all requested info
 4.  Run "source config.sh"

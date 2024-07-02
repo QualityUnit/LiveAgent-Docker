@@ -1,9 +1,9 @@
 FROM centos:7
 
 RUN yum clean all && \
-    yum install -y nc iproute && \
-#   http://www.filewatcher.com/m/haproxy-1.5.4-2.el7.x86_64.rpm.842524-0.html
-    yum -y localinstall ftp://ftp.mirror.anlx.net/centos/7.0/extracted/Packages/haproxy-1.5.4-2.el7.x86_64.rpm && \
+    sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
+    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-* && \
+    yum install -y nc iproute haproxy && \
     yum clean all
 
 COPY haproxy.cfg /etc/haproxy/

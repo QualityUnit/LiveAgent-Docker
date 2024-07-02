@@ -1,0 +1,11 @@
+[remi-php82-repo]
+name=Remi PHP 8.2 Repository
+enabled=1
+baseurl=http://rpms.famillecollet.com/enterprise/7/php82/x86_64/
+gpgcheck=0
+
+[remi-repo]
+gpgcheck=0
+enabled=1
+baseurl=http://rpms.famillecollet.com/enterprise/7/remi/$basearch/
+name=Remi Repository

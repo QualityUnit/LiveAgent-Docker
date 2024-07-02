@@ -1,8 +1,10 @@
 FROM centos:7
 
-COPY remi-php74.repo /etc/yum.repos.d/remi-php74.repo
+COPY remi-php82.repo /etc/yum.repos.d/remi-php82.repo
 
 RUN yum clean all && \
+    sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
+    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-* && \
     yum-config-manager --enable remi-php74-repo && \
     yum-config-manager --enable remi-repo && \
     yum -y install epel-release && \
@@ -32,7 +34,9 @@ RUN unzip /var/www/la* -d /var/www/liveagent
 COPY liveagent.conf /etc/httpd/sites.d/liveagent.conf
 COPY settings.php /var/www/liveagent/accounts/settings.php
 RUN chmod -R 777 /var/www/liveagent/accounts && \
-    chown -R apache:apache /var/www/liveagent/accounts
+    chown -R apache:apache /var/www/liveagent/accounts && \
+    mkdir -p /var/www/liveagent/var && \
+    chmod -R 777 /var/www/liveagent/var
 
 #LA INSTALL/UPDATE
 COPY install.sh /install.sh

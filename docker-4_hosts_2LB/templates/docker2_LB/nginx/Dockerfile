@@ -3,6 +3,8 @@ FROM centos:7
 COPY nginx-lua-redis-pushstream-1.20.2-1.el7.rpm /var/nginx-lua-redis-pushstream-1.20.2-1.el7.rpm
 
 RUN yum clean all && \
+    sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
+    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-* && \
     yum -y localinstall /var/nginx-lua-redis-pushstream-1.20.2-1.el7.rpm && \
     yum install -y iproute && \
     yum clean all
