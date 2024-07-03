@@ -10,6 +10,10 @@ cluster.initial_master_nodes:
   - PRIVATE_IP_1
   - PRIVATE_IP_2
   - PRIVATE_IP_3
+discovery.seed_hosts:
+  - PRIVATE_IP_1
+  - PRIVATE_IP_2
+  - PRIVATE_IP_3
 
 # AH (22.6.2015): To avoid delete_all_indices
 action.destructive_requires_name: true
