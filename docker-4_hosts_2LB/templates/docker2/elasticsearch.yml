@@ -2,10 +2,10 @@ cluster.name: "es-cluster"
 node.name: "es2-docker-node"
 network.host: 0.0.0.0
 network.bind_host: 0.0.0.0
-node.master: true
-node.data: true
+node.roles:
+  - data
+  - master
 network.publish_host: PRIVATE_IP_2
-discovery.zen.ping.unicast.hosts: ["PRIVATE_IP_1", "PRIVATE_IP_2", "PRIVATE_IP_3"]
 cluster.initial_master_nodes:
   - PRIVATE_IP_1
   - PRIVATE_IP_2
