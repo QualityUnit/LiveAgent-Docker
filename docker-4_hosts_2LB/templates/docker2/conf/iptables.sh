@@ -9,7 +9,7 @@
 #
 # Set default policies for INPUT, FORWARD and OUTPUT chains
 #
- iptables -P INPUT DROP
+ iptables -P INPUT ACCEPT
  iptables -P FORWARD DROP
  iptables -P OUTPUT ACCEPT
 #

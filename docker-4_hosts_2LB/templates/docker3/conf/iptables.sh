@@ -6,14 +6,10 @@
 #
  iptables -F
 #
-# Allow HTTP/HTTPS connections
-#
- iptables -A INPUT -p tcp --dport 80 -j ACCEPT
- iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 #
 # Set default policies for INPUT, FORWARD and OUTPUT chains
 #
- iptables -P INPUT DROP
+ iptables -P INPUT ACCEPT
  iptables -P FORWARD DROP
  iptables -P OUTPUT ACCEPT
 #
